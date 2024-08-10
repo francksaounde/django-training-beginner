@@ -28,9 +28,9 @@ On ajoute donc la chaine de caractères  *"listings"*  dans la liste python *INS
 
 ***En résumé***                            
 Lorsque nous démarrons un nouveau projet Django, 
-- Nous installons la dernière version de Django avec `pip install django`.
-- Nous générons notre code de de base,
+- Nous installons la dernière version de Django avec `pip install django`
+- Nous générons notre code de de base
 - Initialisons notre base de données
 - Et démarrons le serveur de développement à l'aide de l'utilitaire de ligne de commande de Django.                 
 
-Nous vérifions que tout fonctionne comme il se doit en naviguant vers le front-end du site à l'adresse `http://127.0.0.1:8000/`.
+Nous vérifions que tout fonctionne comme il se doit en naviguant vers le front-end du site à l'adresse `http://127.0.0.1:8000/`
