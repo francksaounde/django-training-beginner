@@ -1,9 +1,9 @@
 **Initialisation du projet** 
                 
 `django-admin startproject stockexchange` => pour initialiser un projet django (nommé ici *stockexchange*)       
-Cette commande d'initialisation crée le projet et à l'intérieur du répertoire il y a 3 éléments:
+Cette commande d'initialisation crée un répertoire pour le projet et à l'intérieur du répertoire il y a 3 éléments:
 - un fichier sqlite3 (qui est la bdd par défaut de django)
-- un fichier manage.py qui est un utilitaire plus spécifique au projet par rapport à django-admin qui lui est plus générique     
+- un fichier manage.py qui est un utilitaire plus spécifique au projet par rapport à django-admin (qui est plus générique)     
 - un répertoire de même nom que le parent *stockexchange* et qui sera notre répertoire de projet *(une sorte de tour de contrôle qui contient des fichiers de configuration pour l'ensemble du projet)*
 
 Par la suite on se déplace dans le projet nouvellement créé en faisant       
@@ -24,7 +24,7 @@ Ayant le serveur et une bdd, on peut créer une app django, on l'appellera listi
 
 Ensuite on peut ajouter l'application *listings* dans la liste des applications.
 Concrètement, il s'agit d'ajouter *listings* dans le fichier **settings.py** du répertoire *stockexchange*.
-On ajoute donc la chaine de caractères  *"listings"*  dans la liste python *INSTALLED_APPS*                
+On ajoute donc la chaine de caractères  *"listings"*  dans la liste (au sens python) *INSTALLED_APPS*                
 
 ***En résumé***                            
 Lorsque nous démarrons un nouveau projet Django, 
