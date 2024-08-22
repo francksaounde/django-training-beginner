@@ -26,7 +26,7 @@ Ensuite on peut ajouter l'application *listings* dans la liste des applications.
 Concrètement, il s'agit d'ajouter *listings* dans le fichier **settings.py** du répertoire *stockexchange*.
 On ajoute donc la chaine de caractères  *"listings"*  dans la liste (au sens python) *INSTALLED_APPS*                
 
-***En résumé***                            
+***Résumé sur l'initialisation***                            
 Lorsque nous démarrons un nouveau projet Django, 
 - Nous installons la dernière version de Django avec `pip install django`
 - Nous générons notre code de de base
@@ -34,3 +34,46 @@ Lorsque nous démarrons un nouveau projet Django,
 - Et démarrons le serveur de développement à l'aide de l'utilitaire de ligne de commande de Django.                 
 
 Nous vérifions que tout fonctionne comme il se doit en naviguant vers le front-end du site à l'adresse `http://127.0.0.1:8000/`
+
+*******************************************************************************************
+
+**Première vue Django**                    
+Une vue a pour fonction de répondre à la visite d'un utilisateur sur le site en renvoyant une page que l’utilisateur peut voir.    
+Elle prend en paramètre un *objet HttpRequest* (généralement on note juste "request" sans préciser son type) et retourne un *objet HttpResponse*.    
+Pour mettre en place notre vue, il faut créer un un modèle d'URL et de le lier au code de notre vue.   
+Ainsi quand l'user va rechercher l'url le code de la vue associé sera exécuté.          
+Le modèle d'url est créé dans le fichier urls.py de notre tour de contrôle stockexchange.   
+La variable `urlpatterns` contient la liste des modèles d'url.          
+Le modèle d'url est défini grâce à la fonction path qui prend en paramètre un chemin et la vue correspondante à exécuter.      
+
+***Attention***     
+Lorsqu'on ajoute un chemin à un modèle d'URL, il ne faut jamais mettre le slash de tête.   
+Par exemple dans le cas de notre première vue on a mis `hello/` et non `/hello/`.
+
+Si on inclue un slash (de tête), le modèle d'URL ne sera pas reconnu et la page ne se chargera pas.    
+Django affichera un avertissement dans le terminal.
+
+***Le modèle par défaut admin***:                 
+Quand nous créons le projet par le CLI de django, par défaut il y a création d'un modèle avec le chemin admin/.     
+Ce modèle par défaut servira au paramétrage (on en parlera ultérieurement)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
