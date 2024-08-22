@@ -57,7 +57,7 @@ Par exemple dans le cas de notre première vue on a mis `hello/` et non `/hello/
 Si on inclue un slash (de tête), le modèle d'URL ne sera pas reconnu et la page ne se chargera pas.    
 Django affichera un avertissement dans le terminal.
 
-***Le modèle par défaut admin***:                 
+***Le modèle d'url par défaut admin***:                 
 Quand nous créons le projet par le CLI de django, par défaut il y a création d'un modèle avec le chemin admin/.     
 Ce modèle par défaut servira au paramétrage (on en parlera ultérieurement)               
 En résumé, lorsqu'une URL correspond à un modèle d'URL, le déroulement passe à l'étape suivante :          
