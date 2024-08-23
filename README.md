@@ -104,6 +104,29 @@ On prend l'exemple de la classe _Band_ qui signifie _Groupe_ en français.
 - band.save()  => stocke l'objet créé en bdd et lui affecte un attribut  (il s'agit d'un objet créé par exemple en faisant band=Band())
 - Band.objects.count() => permet d'afficher le nombre d'objets Band stockés en bdd      
 - Band.objects.all() => affiche la liste des objets Band existants en bdd (plus précisément il s'agit d'une structure de type QuerySet = sorte de liste Python avec d'autres spécificités)
+
+Maintenant que les modèles ont été créés et que des instances ont été sauvegardées en bdd, on peut les afficher dans nos pages en passant par les vues.      
+On récupère par exemple les instances de bdd comme dit précédemment par : `bands = Band.objects.all()`, puis dans une f-string on peut entre-accolades placer les éléments à afficher.    
+Ca donne: `f"""{bands[i].name}"""` pour afficher la valeur du champ name de l'objet d'indice i dans le QuerySet.          
+On met ce code dans une vue.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   
                     
 
