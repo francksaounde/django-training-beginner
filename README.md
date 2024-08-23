@@ -96,7 +96,7 @@ La commande `python manage.py makemigrations` va générer les scripts SQL et la
 ****Utilisation du shell django****: Le shell de Django est simplement un shell Python ordinaire qui exécute votre application Django. Il permet d'essayer du code en temps réel.       
 Pour ouvrir le shell faire la commande `python manage.py shell`.          
 _Nota:_ Le code d'un module/fichier Python peut être exécuté de nombreuses fois tandis que le code tapé dans le shell Django n'est exécuté qu'une seule fois, puis oublié (puisqu'il n'est pas stocké quelque part). Mais ses effets sont bien entendu permanents quand ils sont stockés via la méthode save.           
-La méthode `save` permet de stocker l'objet en bdd et par la même occasion de lui attribuer un id.           
+La méthode `save` permet de stocker l'objet en bdd et par la même occasion de lui attribuer un id; elle est héritée de la classe de base `models.Model` (de Django) dont hérite nos modèles.              
 
 *****Quelques requêtes sur les modèles dans le shell:*****   
 On prend l'exemple de la classe _Band_ qui signifie _Groupe_ en français.          
@@ -105,11 +105,17 @@ On prend l'exemple de la classe _Band_ qui signifie _Groupe_ en français.
 - Band.objects.count() => permet d'afficher le nombre d'objets Band stockés en bdd      
 - Band.objects.all() => affiche la liste des objets Band existants en bdd (plus précisément il s'agit d'une structure de type QuerySet = sorte de liste Python avec d'autres spécificités)
 
+*****Mise à jour des vues pour afficher les objets des modèles:*****            
+
 Maintenant que les modèles ont été créés et que des instances ont été sauvegardées en bdd, on peut les afficher dans nos pages en passant par les vues.      
 On récupère par exemple les instances de bdd comme dit précédemment par : `bands = Band.objects.all()`, puis dans une f-string on peut entre-accolades placer les éléments à afficher.    
-Ca donne: `f"""{bands[i].name}"""` pour afficher la valeur du champ name de l'objet d'indice i dans le QuerySet.          
-On met ce code dans une vue.
+Ca donne: `f"""{bands[i].name}"""` pour afficher la valeur du champ _name_ de l'objet d'indice _i_ dans le QuerySet.          
+On met ce code dans une vue.               
 
+****Petits éléments à retenir:****      
+- Une migration est un ensemble d'instructions qui font passer notre base de données d'un état à un autre, par exemple en créant une nouvelle table. Nous pouvons utiliser le CLI de Django pour générer et exécuter les migrations à notre place.        
+- Nous pouvons utiliser le shell de Django pour insérer de nouveaux objets dans notre base de données.
+- Dans une vue, nous pouvons récupérer des objets dans la base de données et afficher leurs données dans nos pages.
 
 
 
