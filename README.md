@@ -117,6 +117,10 @@ On met ce code dans une vue.
 - Nous pouvons utiliser le shell de Django pour insérer de nouveaux objets dans notre base de données.
 - Dans une vue, nous pouvons récupérer des objets dans la base de données et afficher leurs données dans nos pages.
 
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+***Gabarit (ou template) Django***      
+Fichier HTML capable d'interpréter du code Python. Il peut donc recevoir des données depuis le modèle et intégrer des mécanismes comme des boucles
 
 
 
