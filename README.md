@@ -95,14 +95,15 @@ La commande `python manage.py makemigrations` va générer les scripts SQL et la
 
 ****Utilisation du shell django****: Le shell de Django est simplement un shell Python ordinaire qui exécute votre application Django. Il permet d'essayer du code en temps réel.       
 Pour ouvrir le shell faire la commande `python manage.py shell`.          
-Nota: Le code d'un module/fichier Python peut être exécuté de nombreuses fois tandis que le code tapé dans le shell Django n'est exécuté qu'une seule fois, puis oublié.           
+_Nota:_ Le code d'un module/fichier Python peut être exécuté de nombreuses fois tandis que le code tapé dans le shell Django n'est exécuté qu'une seule fois, puis oublié (puisqu'il n'est pas stocké quelque part). Mais ses effets sont bien entendu permanents quand ils sont stockés via la méthode save.           
 La méthode `save` permet de stocker l'objet en bdd et par la même occasion de lui attribuer un id.           
 
 *****Quelques requêtes sur les modèles dans le shell:*****   
+On prend l'exemple de la classe _Band_ qui signifie _Groupe_ en français.          
 - band = Band.objects.create(name='Foo Fighters')   => crée un objet Band avec l'attribut name qui vaut _Foo Fighters_
 - band.save()  => stocke l'objet créé en bdd et lui affecte un attribut
 - Band.objects.count() permet d'afficher le nombre d'objets Band créés
-- Band.objects.all() affiche la liste des objets Band existants (plus précisément il s'agit d'un QuerySet)
+- Band.objects.all() affiche la liste des objets Band existants (plus précisément il s'agit d'un QuerySet = sorte de liste Python avec d'autres spécificités)
   
                     
 
