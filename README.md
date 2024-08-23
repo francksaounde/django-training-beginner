@@ -35,7 +35,7 @@ Lorsque nous démarrons un nouveau projet Django,
 
 Nous vérifions que tout fonctionne comme il se doit en naviguant vers le front-end du site à l'adresse `http://127.0.0.1:8000/`
 
-*******************************************************************************************
+***************************************************************************************************************************************************
 
 **Première vue Django**                    
 Une vue a pour fonction de répondre à la visite d'un utilisateur sur le site en renvoyant une page que l’utilisateur peut voir.    
@@ -63,8 +63,23 @@ Ce modèle par défaut servira au paramétrage (on en parlera ultérieurement)
 En résumé, lorsqu'une URL correspond à un modèle d'URL, le déroulement passe à l'étape suivante :          
 La demande HTTP est transmise à la vue spécifiée.          
 
+-------------------------------------------------------------------------------------------------------------------------------------------------
 
+***Modèle Django***
 
+Il nous servira à afficher les données dans nos pages.                    
+Grâce à l'ORM on passe des classes aux tables de façon implicite.                     
+
+Pour chaque entité pour laquelle nous voulons stocker des données, nous créons un modèle pour représenter cette entité.               
+Un modèle définit les caractéristiques que nous voulons stocker à propos d'une entité particulière.         
+
+***Différences modèle et classe***             
+Un modèle tout comme une classe permet de définir les caractéristiques des entités.    
+En outre, dans les frameworks MVC et MVT en général, un modèle est également capable de stocker (ou de `"persister"`) ses données dans une base de données pour une utilisation ultérieure.     
+Cela contraste avec les classes et objets ordinaires, dont les données existent temporairement : par exemple seulement pendant l'exécution de l'application.           
+De même, les « caractéristiques » des classes Python sont appelées attributs/propriétés, mais lorsqu'un modèle enregistre un attribut dans la base de données, il s'agit d'un champ.    
+
+Un des avantages de l'utilisation d'un framework comme Django est que toutes les fonctionnalités de persistance des données dans une base de données ont été pré-écrites. Tout ce qui reste à faire au développeur est de faire au modèle hériter de la classe `models.Model` de Django. Le modèle hérite ensuite de toutes les méthodes (comportements) nécessaires pour effectuer des opérations telles que la sélection et l'insertion de données dans une base de données.
                     
 
 
