@@ -100,10 +100,10 @@ La méthode `save` permet de stocker l'objet en bdd et par la même occasion de 
 
 *****Quelques requêtes sur les modèles dans le shell:*****   
 On prend l'exemple de la classe _Band_ qui signifie _Groupe_ en français.          
-- band = Band.objects.create(name='Foo Fighters')   => crée un objet Band avec l'attribut name qui vaut _Foo Fighters_
-- band.save()  => stocke l'objet créé en bdd et lui affecte un attribut
-- Band.objects.count() => permet d'afficher le nombre d'objets Band créés
-- Band.objects.all() => affiche la liste des objets Band existants (plus précisément il s'agit d'un QuerySet = sorte de liste Python avec d'autres spécificités)
+- band = Band.objects.create(name='Foo Fighters')   => crée un objet Band (avec l'attribut name qui vaut _Foo Fighters_) et le stocke dans la bdd        
+- band.save()  => stocke l'objet créé en bdd et lui affecte un attribut  (il s'agit d'un objet créé par exemple en faisant band=Band())
+- Band.objects.count() => permet d'afficher le nombre d'objets Band stockés en bdd      
+- Band.objects.all() => affiche la liste des objets Band existants en bdd (plus précisément il s'agit d'une structure de type QuerySet = sorte de liste Python avec d'autres spécificités)
   
                     
 
