@@ -87,11 +87,23 @@ Les types de données sont préfixés par `models.fields`, par exemple models.fi
 Les classes Python ont généralement un constructeur : la méthode `__init__`, où nous utilisons les arguments passés pour définir les valeurs des *attributs d'instance*.            
 Avec les modèles Django, les choses se font différemment. Le framework examine les champs du modèle (que nous définissons comme des *attributs de classe*), puis crée le constructeur pour nous.              
 
-Quelques rappels:    
-clé primaire : un identifiant unique pour chaque ligne de la table.          
-Schéma : structure d'une base de données, en termes de tables et de colonnes
+*****Quelques rappels:*****    
+- clé primaire : un identifiant unique pour chaque ligne de la table.          
+- Schéma : structure d'une base de données, en termes de tables et de colonnes
 
-La commande `python manage.py makemigrations` va générer les scripts SQL et la commande `python manage.py migrate` va les exécuter sur notre bdd           
+La commande `python manage.py makemigrations` va générer les scripts SQL et la commande `python manage.py migrate` va les exécuter sur notre bdd       
+
+****Utilisation du shell django****: Le shell de Django est simplement un shell Python ordinaire qui exécute votre application Django. Il permet d'essayer du code en temps réel.       
+Pour ouvrir le shell faire la commande `python manage.py shell`.          
+Nota: Le code d'un module/fichier Python peut être exécuté de nombreuses fois tandis que le code tapé dans le shell Django n'est exécuté qu'une seule fois, puis oublié.           
+La méthode `save` permet de stocker l'objet en bdd et par la même occasion de lui attribuer un id.           
+
+*****Quelques requêtes sur les modèles dans le shell:*****   
+- band = Band.objects.create(name='Foo Fighters')   => crée un objet Band avec l'attribut name qui vaut _Foo Fighters_
+- band.save()  => stocke l'objet créé en bdd et lui affecte un attribut
+- Band.objects.count() permet d'afficher le nombre d'objets Band créés
+- Band.objects.all() affiche la liste des objets Band existants (plus précisément il s'agit d'un QuerySet)
+  
                     
 
 
