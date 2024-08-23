@@ -35,7 +35,7 @@ Lorsque nous démarrons un nouveau projet Django,
 
 Nous vérifions que tout fonctionne comme il se doit en naviguant vers le front-end du site à l'adresse `http://127.0.0.1:8000/`
 
-*******************************************************************************************
+***************************************************************************************************************************************************
 
 **Première vue Django**                    
 Une vue a pour fonction de répondre à la visite d'un utilisateur sur le site en renvoyant une page que l’utilisateur peut voir.    
@@ -57,14 +57,87 @@ Par exemple dans le cas de notre première vue on a mis `hello/` et non `/hello/
 Si on inclue un slash (de tête), le modèle d'URL ne sera pas reconnu et la page ne se chargera pas.    
 Django affichera un avertissement dans le terminal.
 
-***Le modèle par défaut admin***:                 
+***Le modèle d'url par défaut admin***:                 
 Quand nous créons le projet par le CLI de django, par défaut il y a création d'un modèle avec le chemin admin/.     
 Ce modèle par défaut servira au paramétrage (on en parlera ultérieurement)               
 En résumé, lorsqu'une URL correspond à un modèle d'URL, le déroulement passe à l'étape suivante :          
 La demande HTTP est transmise à la vue spécifiée.          
 
+-------------------------------------------------------------------------------------------------------------------------------------------------
+
+***Modèle Django***
+
+Il nous servira à afficher les données dans nos pages.                    
+Grâce à l'ORM on passe des classes aux tables de façon implicite.                     
+
+Pour chaque entité pour laquelle nous voulons stocker des données, nous créons un modèle pour représenter cette entité.               
+Un modèle définit les caractéristiques que nous voulons stocker à propos d'une entité particulière.         
+
+***Différences modèle et classe***             
+Un modèle tout comme une classe permet de définir les caractéristiques des entités.    
+En outre, dans les frameworks MVC et MVT en général, un modèle est également capable de stocker (ou de `"persister"`) ses données dans une base de données pour une utilisation ultérieure.     
+Cela contraste avec les classes et objets ordinaires, dont les données existent temporairement : par exemple seulement pendant l'exécution de l'application.           
+De même, les « caractéristiques » des classes Python sont appelées attributs/propriétés, mais lorsqu'un modèle enregistre un attribut dans la base de données, il s'agit d'un champ.    
+
+Un des avantages de l'utilisation d'un framework comme Django est que toutes les fonctionnalités de persistance des données dans une base de données ont été pré-écrites. Tout ce qui reste à faire au développeur est de faire au modèle hériter de la classe `models.Model` de Django. Le modèle hérite ensuite de toutes les méthodes (comportements) nécessaires pour effectuer des opérations telles que la sélection et l'insertion de données dans une base de données.
+
+***Définition du modèle***    
+Les types de données sont préfixés par `models.fields`, par exemple models.fields.CharField qui stocke des données de type caractère/texte/chaîne
+
+Les classes Python ont généralement un constructeur : la méthode `__init__`, où nous utilisons les arguments passés pour définir les valeurs des *attributs d'instance*.            
+Avec les modèles Django, les choses se font différemment. Le framework examine les champs du modèle (que nous définissons comme des *attributs de classe*), puis crée le constructeur pour nous.              
+
+*****Quelques rappels:*****    
+- clé primaire : un identifiant unique pour chaque ligne de la table.          
+- Schéma : structure d'une base de données, en termes de tables et de colonnes
+
+La commande `python manage.py makemigrations` va générer les scripts SQL et la commande `python manage.py migrate` va les exécuter sur notre bdd       
+
+****Utilisation du shell django****: Le shell de Django est simplement un shell Python ordinaire qui exécute votre application Django. Il permet d'essayer du code en temps réel.       
+Pour ouvrir le shell faire la commande `python manage.py shell`.          
+_Nota:_ Le code d'un module/fichier Python peut être exécuté de nombreuses fois tandis que le code tapé dans le shell Django n'est exécuté qu'une seule fois, puis oublié (puisqu'il n'est pas stocké quelque part). Mais ses effets sont bien entendu permanents quand ils sont stockés via la méthode save.           
+La méthode `save` permet de stocker l'objet en bdd et par la même occasion de lui attribuer un id; elle est héritée de la classe de base `models.Model` (de Django) dont hérite nos modèles.              
+
+*****Quelques requêtes sur les modèles dans le shell:*****   
+On prend l'exemple de la classe _Band_ qui signifie _Groupe_ en français.          
+- band = Band.objects.create(name='Foo Fighters')   => crée un objet Band (avec l'attribut name qui vaut _Foo Fighters_) et le stocke dans la bdd        
+- band.save()  => stocke l'objet créé en bdd et lui affecte un attribut  (il s'agit d'un objet créé par exemple en faisant band=Band())
+- Band.objects.count() => permet d'afficher le nombre d'objets Band stockés en bdd      
+- Band.objects.all() => affiche la liste des objets Band existants en bdd (plus précisément il s'agit d'une structure de type QuerySet = sorte de liste Python avec d'autres spécificités)
+
+*****Mise à jour des vues pour afficher les objets des modèles:*****            
+
+Maintenant que les modèles ont été créés et que des instances ont été sauvegardées en bdd, on peut les afficher dans nos pages en passant par les vues.      
+On récupère par exemple les instances de bdd comme dit précédemment par : `bands = Band.objects.all()`, puis dans une f-string on peut entre-accolades placer les éléments à afficher.    
+Ca donne: `f"""{bands[i].name}"""` pour afficher la valeur du champ _name_ de l'objet d'indice _i_ dans le QuerySet.          
+On met ce code dans une vue.               
+
+****Petits éléments à retenir:****      
+- Une migration est un ensemble d'instructions qui font passer notre base de données d'un état à un autre, par exemple en créant une nouvelle table. Nous pouvons utiliser le CLI de Django pour générer et exécuter les migrations à notre place.        
+- Nous pouvons utiliser le shell de Django pour insérer de nouveaux objets dans notre base de données.
+- Dans une vue, nous pouvons récupérer des objets dans la base de données et afficher leurs données dans nos pages.
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+***Gabarit (ou template) Django***      
+Fichier HTML capable d'interpréter du code Python. Il peut donc recevoir des données depuis le modèle et intégrer des mécanismes comme des boucles
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
                     
 
 
