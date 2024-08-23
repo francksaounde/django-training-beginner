@@ -80,6 +80,18 @@ Cela contraste avec les classes et objets ordinaires, dont les données existent
 De même, les « caractéristiques » des classes Python sont appelées attributs/propriétés, mais lorsqu'un modèle enregistre un attribut dans la base de données, il s'agit d'un champ.    
 
 Un des avantages de l'utilisation d'un framework comme Django est que toutes les fonctionnalités de persistance des données dans une base de données ont été pré-écrites. Tout ce qui reste à faire au développeur est de faire au modèle hériter de la classe `models.Model` de Django. Le modèle hérite ensuite de toutes les méthodes (comportements) nécessaires pour effectuer des opérations telles que la sélection et l'insertion de données dans une base de données.
+
+***Définition du modèle***    
+Les types de données sont préfixés par `models.fields`, par exemple models.fields.CharField qui stocke des données de type caractère/texte/chaîne
+
+Les classes Python ont généralement un constructeur : la méthode `__init__`, où nous utilisons les arguments passés pour définir les valeurs des *attributs d'instance*.            
+Avec les modèles Django, les choses se font différemment. Le framework examine les champs du modèle (que nous définissons comme des *attributs de classe*), puis crée le constructeur pour nous.              
+
+Quelques rappels:    
+clé primaire : un identifiant unique pour chaque ligne de la table.          
+Schéma : structure d'une base de données, en termes de tables et de colonnes
+
+La commande `python manage.py makemigrations` va générer les scripts SQL et la commande `python manage.py migrate` va les exécuter sur notre bdd           
                     
 
 
