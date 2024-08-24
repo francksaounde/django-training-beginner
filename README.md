@@ -120,15 +120,25 @@ On met ce code dans une vue.
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 ***Gabarit (ou template) Django***      
-Fichier HTML capable d'interpréter du code Python. Il peut donc recevoir des données depuis le modèle et intégrer des mécanismes comme des boucles
+Fichier HTML capable d'interpréter du code Python. Il peut donc recevoir des données depuis le modèle et intégrer des mécanismes comme des boucles.           
 
+************_Rappel sur le design pattern MVT:_************
+- Le modèle stocke les données
+- La vue joue le rôle d'orchestrateur et récupère les données du modèle à injecter dans le bon template
+- Le template se charge de l'affichage
 
+Jusqu'ici le fait de mettre du code HTML dans la vue est un anti-pattern et on le voit bien quand ce code HTML grossit.   
+En plus le `principe de responsabilité unique` est violé car la vue gère à la fois la logique (la logique-métier vu que la vue sélectionne tous les objets Band de la base de données) et la présentation (l'affichage -des noms des groupes...-).          
+Pour résoudre le problème, on va déplacer la partie présentation vers le gabarit.          
 
-
-
-
-
-
+*****Création du premier gabarit:*****       
+On crée (sous le répertoire de l'application listings) un répertoire de gabarits, qu'on appelle templates. 
+Sous ce répertoire templates on crée un répertoire qui porte le nom de l'application ici "listings".       
+Cette nomenclature est faite pour éviter les ambiguités. Car pour la recherche de gabarits, django cherche systématiquement dans les répertoires templates.      
+Donc ajouter le nom de l'application avant de mettre les fichiers HTML permet bien de faire la différence.               
+Ainsi avec deux applications app1 et app2, et des fichiers temp1_app1, temp2_app1, temp1_app2, temp2_app2, on aura les chemins:      
+app1/temp1_app1, app1/temp2_app1, app2/temp1_app2, app2/temp2_app2.
+Aucune ambiguité... 
 
 
 
