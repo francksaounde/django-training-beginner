@@ -137,7 +137,9 @@ Sous ce répertoire templates on crée un répertoire qui porte le nom de l'appl
 Cette nomenclature est faite pour éviter les ambiguités. Car pour la recherche de gabarits, django cherche systématiquement dans les répertoires templates.      
 Donc ajouter le nom de l'application avant de mettre les fichiers HTML permet bien de faire la différence.               
 Ainsi avec deux applications app1 et app2, et des fichiers temp1_app1, temp2_app1 (relatifs à app1), temp1_app2, temp2_app2 (relatifs à app2), on aura les chemins:      
-templates/app1/temp1_app1, templates/app1/temp2_app1, templates/app2/temp1_app2, templates/app2/temp2_app2. ***Et donc, aucune ambiguité possible***!!!
+- templates/app1/temp1_app1, templates/app1/temp2_app1,
+- templates/app2/temp1_app2, templates/app2/temp2_app2.
+***Et donc, aucune ambiguité possible***!!!
 
 
 
