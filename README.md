@@ -144,10 +144,13 @@ Ainsi avec deux applications app1 et app2, et des fichiers temp1_app1, temp2_app
 *****Mise à jour de la vue pour la génération du gabarit*****      
 Jusqu'ici la vue faisait une génération brute d'objet HttpResponse. Maintenant nous introduisons la méthode `render` qui prend un objet `HttpRequest` (nommé par convention `request`) 
 et d'autres arguments et retourne un `HttpResponse`.    
-***Rappel définition technique d'une vue:***
-Une vue est un élément qui prend en entrée un objet de type HttpRequest et retourne un HttpResponse.          
+***Rappel définition (technique) d'une vue:***
+Une vue est un élément qui prend en entrée un objet de type HttpRequest et retourne un HttpResponse.                   
 
-
+Paramètres de la méthode render:
+- un objet request (de type HttpRequest)
+- le chemin vers le template généré
+- un dictionnaire 
 
 
 
