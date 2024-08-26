@@ -120,14 +120,92 @@ On met ce code dans une vue.
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 ***Gabarit (ou template) Django***      
-Fichier HTML capable d'interpréter du code Python. Il peut donc recevoir des données depuis le modèle et intégrer des mécanismes comme des boucles
+Fichier HTML capable d'interpréter du code Python. Il peut donc recevoir des données depuis le modèle et intégrer des mécanismes comme des boucles.           
+
+************_Rappel sur le design pattern MVT:_************
+- Le modèle stocke les données
+- La vue joue le rôle d'orchestrateur et récupère les données du modèle à injecter dans le bon template
+- Le template se charge de l'affichage
+
+Jusqu'ici le fait de mettre du code HTML dans la vue est un anti-pattern et on le voit bien quand ce code HTML grossit.   
+En plus le `principe de responsabilité unique` est violé car la vue gère à la fois la logique (la logique renvoie à ce qui est logique, 
+et en ce qui concerne la vue, celle-ci est en relation avec le métier, elle sélectionne tous les objets Band de la base de données) et 
+la présentation (l'affichage -des noms des groupes...-).          
+Pour résoudre le problème, on va déplacer la partie présentation vers le gabarit.          
+
+*****Création du premier gabarit:*****       
+On crée (sous le répertoire de l'application listings) un répertoire de gabarits, qu'on appelle templates. 
+Sous ce répertoire templates on crée un répertoire qui porte le nom de l'application ici "listings".       
+Cette nomenclature est faite pour éviter les ambiguités. Car pour la recherche de gabarits, django cherche systématiquement dans les répertoires templates.      
+Donc ajouter le nom de l'application avant de mettre les fichiers HTML permet bien de faire la différence.               
+Ainsi avec deux applications app1 et app2, et des fichiers temp1_app1, temp2_app1 (relatifs à app1), temp1_app2, temp2_app2 (relatifs à app2), on aura les chemins:      
+- templates/app1/temp1_app1  et  templates/app1/temp2_app1 pour app1
+- templates/app2/temp1_app2 et templates/app2/temp2_app2 pour app2.             
+***Et donc, aucune ambiguité possible***!!!
+
+*****Mise à jour de la vue pour la génération du gabarit*****      
+Jusqu'ici la vue faisait une génération brute d'objet HttpResponse. Maintenant nous introduisons la méthode `render` qui prend un objet `HttpRequest` (nommé par convention `request`) 
+et d'autres arguments et retourne un `HttpResponse`.    
+***Rappel définition (technique) d'une vue:***
+Une vue est un élément qui prend en entrée un objet de type HttpRequest et retourne un HttpResponse.                   
+
+Paramètres de la méthode render:
+- un objet request (de type HttpRequest)
+- le chemin vers le template généré
+- un dictionnaire contextuel:
+Chaque clé du dictionnaire devient une variable que nous pouvons utiliser pour indexer le modèle dans le fichier de gabarits.                    
+En effet, `la clé est identifiée à sa valeur`.
+Par exemple la définition `{'first_band': bands[0]})` au niveau de la vue, permet d'écrire: `{{ first_band.name }}` au niveau du template.                           
+Cette écriture est équivalente à l'écriture Python: `band[0].name` pour indexer le champ name du 1er groupe (indice 0) du QuerySet.              
+Les _accolades doubles_ sont utilisées au niveau du gabarit pour injecter des appels au modèle via les variables passées par le dictionnaire contextuel de la vue.
+
+Nota: Dans un code HTML valide, les gabarits de Django peuvent inclure une syntaxe avec des accolades, on l'appelle aussi *****langage de gabarits Django*****. Et 
+les variables appelées entre accolades sont appelées aussi *****variables de gabarits*****         
+Prenons un deuxième exemple: le dictionnaire `{'cle': bands}` donne lieu dans le gabarit aux appels `{{ cle.i.name }}` avec _i_ l'indice du groupe dans le Queryset.      
+```
+- {{ cle.0.name }}
+- {{ cle.1.name }}
+- {{ cle.2.name }}
+```
+Notons qu'on ne fait pas `cle[i].name` comme en Python, en effet cette dernière écriture génèrerait une erreur.   
+On fera donc un appel par notation pointée.     
+Dans nos exemples on récupèrera la liste des objets à travers l'écriture `bands=Band.objects.all()` et on définira le dictionnaire `{'bands': bands}`.
+Dans cette écriture, la clé _bands_ est une variable muette qui peut être remplacée par n'importe quoi, 
+par contre la valeur _bands_ contient bien la liste des objets récupérés précédemment.              
 
 
+*****Résumé  de cette première partie sur l'introduction aux gabarits*****      
+Les gabarits sont un moyen pour définir le contenu d'une page qui ne change pas.      
+À l'intérieur de ces gabarits, nous insérons des variables de gabarits, qui servent d'espaces réservés pour le contenu qui change. 
+Lorsque nous générons un gabarit dans une vue, nous passons un dictionnaire de contexte au gabarit et les variables de contexte sont injectées dans leurs espaces respectifs.    
+En gardant la vue libre de tout code de présentation (HTML), nous pouvons limiter la responsabilité de la vue à une seule chose : 
+la logique pour récupérer les données correctes de la base de données, et les injecter dans la page.        
 
+Note sur la logique:
+Dans Django le système de gabarits est un outil qui contrôle la présentation et la logique liée à la présentation. La logique fait référence aux 
+boucles, embranchements (conditions)
 
-
-
-
+Optimisation dans l'utilisation des listes de modèle dans un gabarit:          
+Les boucles et autres instructions logiques sont entourées d'accolades et de signes de pourcentage (`{% ... %}`). Il s'agit de balises de gabarits.     
+On a les balises `for`, `endfor`, ... Attention à ne pas mettre les deux points à la fin comme en Python.   
+Pour le cas de la balise for, l'espace entre les balises for et endfor peut contenir du texte, du HTML et même des variables de gabarits Django.  
+On va proposer une autre écriture du bloc de code:
+```
+- {{ cle.0.name }}
+- {{ cle.1.name }}
+- {{ cle.2.name }}
+```
+En effet, dans la réalité on peut avoir un nombre d'objets dont on ne connait pas le nombre, on peut supprimer certains, etc. Et ce code ne marchera plus.
+On utilise la boucle `for` bien adaptée à l'itération sur une liste dont on ne connait pas la longueur à priori.   
+```
+<ul>
+    {% for band in bands %}
+    <li>{{ band.name }}</li>
+    {% endfor %}
+</ul>
+```
+Dans le bout de code ci-dessus on met la balise  `<li>` dans la boucle car on veut qu'elle se répète, tandis que la balise `<ul>` est hors de la boucle, 
+car on ne veut pas sa répétition.
 
 
 
