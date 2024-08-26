@@ -6,10 +6,11 @@
 </head>
 <body>
       <h1> Hello Django !</h1>
-        <p> Mes groupes préférés sont: </p>
+        <p> J'ai {{ bands|length }} groupes préférés qui sont: </p>
+
         <ul>
             {% for band in bands %}
-                <li>{{band.name}}</li>
+                <li>{{band.name|upper}}</li>
             {% endfor %}
         </ul>
 

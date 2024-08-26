@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>listings</title>
+</head>
+<body>
+    <h1> Ci-après les grands titres pour nos annonces</h1>
+        <p>
+            <ul>
+                {% for listing in listings %}
+                <li> {{ listing.title }}</li>
+                {% endfor %}
+            </ul>
+        </p>
+</body>
+</html>

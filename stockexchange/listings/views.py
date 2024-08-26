@@ -11,23 +11,13 @@ def hello(request):
 
 
 def about(request):
-    return HttpResponse("<h1> A propos</h1> <p>Nous aimons la bourse de marchandises</p>")
+    return render(request, 'listings/about.html')
 
 
 def listings(request):
     listings = Listing.objects.all()
-    return HttpResponse(f"""
-        <h1> Ci-après les grands titres pour nos annonces</h1>
-        <p>
-            <ul> 
-                <li> {listings[0].title}</li> 
-                <li> {listings[1].title}</li>
-                <li> {listings[2].title}</li>
-                <li> {listings[3].title}</li>            
-            </ul>
-        </p>
-        
-    """)
+    return render(request, 'listings/listings.html',
+                  {'listings': listings})
 
 
 def contact(request):
