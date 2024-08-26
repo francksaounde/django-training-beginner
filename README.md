@@ -163,7 +163,10 @@ Prenons un deuxième exemple: le dictionnaire `{'cle': bands}` donne lieu dans l
 - {{ cle.2.name }}
 ```
 Notons qu'on ne fait pas `cle[i].name` comme en Python, en effet cette dernière écriture génèrerait une erreur.   
-On fera donc un appel par notation pointée.
+On fera donc un appel par notation pointée.     
+Dans nos exemples on récupèrera la liste des objets à travers l'écriture `bands=Band.objects.all()` et on définira le dictionnaire `{'bands': bands}`.
+Dans cette écriture, la clé _bands_ est une variable muette qui peut être remplacée par n'importe quoi, 
+par contre la valeur _bands_ contient bien la liste des objets récupérés précédemment
 
 
 
