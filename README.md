@@ -199,17 +199,48 @@ En effet, dans la réalité on peut avoir un nombre d'objets dont on ne connait 
 On utilise la boucle `for` bien adaptée à l'itération sur une liste dont on ne connait pas la longueur à priori.   
 ```
 <ul>
-    {% for band in bands %}
-    <li>{{ band.name }}</li>
+    {% for cle in bands %}
+    <li>{{ cle.name }}</li>
     {% endfor %}
 </ul>
 ```
 Dans le bout de code ci-dessus on met la balise  `<li>` dans la boucle car on veut qu'elle se répète, tandis que la balise `<ul>` est hors de la boucle, 
 car on ne veut pas sa répétition.
 
+*****Filtre de gabarit:*****
+- filtre lower (minuscule) ou upper (majuscule)
+Ce filtre est utilisé de la façon suivante: `<li>{{ band.name|upper }}</li>` pour afficher en majuscules le nom du groupe.
+  
+- filtre length:
+  Qui filtre la longueur d'une liste et donc d'un objet QuerySet.
+  On a donc `{{ bands|length }}` qui affiche le nombre de groupes créés en bdd.
 
+***Utilisation de bloc conditionnel if:***
+On peut utiliser if, elif, else comme en python en faisant attention à éviter les deux points (:) de fin.
+On a par exemple le code ci-après:
+```
+<p>
+    J'ai..
+    {% if bands|length < 5 %}
+        peu de
+    {% elif bands|length < 10 %}
+        quelques
+    {% else %}
+        beaucoup de
+    {% endif %}
+        groupes préférés.
+</p>
+```
+Qui affiche  `"J'ai quelques groupes préférés."` si la longueur de la liste vérifie `5 <= bands|length < 10`.
 
+***En résumé***
+- Les gabarits sont l'endroit où nous définissons tous les éléments de présentation d'une page ; pour une application web, c'est le HTML.
 
+- La vue peut ainsi se concentrer sur la logique, dont la récupération des données correctes à injecter dans la page.
+
+- Nous injectons des données dans un gabarit à l'aide de variables de gabarits.
+
+- Nous utilisons les balises de gabarits pour les boucles, les embranchements et le formatage dans les gabarits.
 
 
 
