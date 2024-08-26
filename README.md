@@ -151,11 +151,11 @@ Paramètres de la méthode render:
 - un objet request (de type HttpRequest)
 - le chemin vers le template généré
 - un dictionnaire contextuel:
-Chaque clé du dictionnaire devient une variable que nous pouvons utiliser pour indexer le modèle dans le fichier de gabarits.
-En effet, `la clé est identifiée à sa valeur`. Par exemple la définition `{'first_band': bands[0]})` au niveau de la vue, permet d'écrire: `{{ first_band.name }}`
+Chaque clé du dictionnaire devient une variable que nous pouvons utiliser pour indexer le modèle dans le fichier de gabarits.                    
+En effet, `la clé est identifiée à sa valeur`. Par exemple la définition `{'first_band': bands[0]})` au niveau de la vue, permet d'écrire: `{{ first_band.name }}`        
 au niveau du template.                           
-Cette écriture est équivalente à l'écriture Python: `band[0].name` pour indexer le champ name du 1er groupe (indice 0) du QuerySet.
-Les _accolades doubles_ sont utilisées au niveau du gabarit pour injecter des appels au modèle via les variables passées par le dictionnaire contextuel de la vue.
+Cette écriture est équivalente à l'écriture Python: `band[0].name` pour indexer le champ name du 1er groupe (indice 0) du QuerySet.              
+Les _accolades doubles_ sont utilisées au niveau du gabarit pour injecter des appels au modèle via les variables passées par le dictionnaire contextuel de la vue.               
 Prenons un deuxième exemple: le dictionnaire `{'cle': bands}` donne lieu dans le gabarit aux appels `{{ cle.i.name }}` avec _i_ l'indice du groupe dans le Queryset.      
 ```
 - {{ cle.0.name }}
