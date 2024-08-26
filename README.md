@@ -215,7 +215,7 @@ Ce filtre est utilisé de la façon suivante: `<li>{{ band.name|upper }}</li>` p
   Qui filtre la longueur d'une liste et donc d'un objet QuerySet.
   On a donc `{{ bands|length }}` qui affiche le nombre de groupes créés en bdd.
 
-***Utilisation de bloc conditionnel if***
+***Utilisation de bloc conditionnel if:***
 On peut utiliser if, elif, else comme en python en faisant attention à éviter les deux points (:) de fin.
 On a par exemple le code ci-après:
 ```
@@ -231,11 +231,16 @@ On a par exemple le code ci-après:
         groupes préférés.
 </p>
 ```
-Qui affiche  `J'ai quelques groupes préférés.` si la longueur de la liste vérifie `5 <= bands|length < 10`.
+Qui affiche  `"J'ai quelques groupes préférés."` si la longueur de la liste vérifie `5 <= bands|length < 10`.
 
+***En résumé***
+- Les gabarits sont l'endroit où nous définissons tous les éléments de présentation d'une page ; pour une application web, c'est le HTML.
 
+- La vue peut ainsi se concentrer sur la logique, dont la récupération des données correctes à injecter dans la page.
 
+- Nous injectons des données dans un gabarit à l'aide de variables de gabarits.
 
+- Nous utilisons les balises de gabarits pour les boucles, les embranchements et le formatage dans les gabarits.
 
 
 
