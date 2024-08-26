@@ -169,7 +169,17 @@ Notons qu'on ne fait pas `cle[i].name` comme en Python, en effet cette dernière
 On fera donc un appel par notation pointée.     
 Dans nos exemples on récupèrera la liste des objets à travers l'écriture `bands=Band.objects.all()` et on définira le dictionnaire `{'bands': bands}`.
 Dans cette écriture, la clé _bands_ est une variable muette qui peut être remplacée par n'importe quoi, 
-par contre la valeur _bands_ contient bien la liste des objets récupérés précédemment
+par contre la valeur _bands_ contient bien la liste des objets récupérés précédemment.              
+
+
+*****Résumé  de cette première partie sur l'introduction aux gabarits*****      
+Les gabarits sont un moyen pour définir le contenu d'une page qui ne change pas.      
+À l'intérieur de ces gabarits, nous insérons des variables de gabarits, qui servent d'espaces réservés pour le contenu qui change. 
+Lorsque nous générons un gabarit dans une vue, nous passons un dictionnaire de contexte au gabarit et les variables de contexte sont injectées dans leurs espaces respectifs.    
+En gardant la vue libre de tout code de présentation (HTML), nous pouvons limiter la responsabilité de la vue à une seule chose : 
+la logique pour récupérer les données correctes de la base de données, et les injecter dans la page.
+
+
 
 
 
