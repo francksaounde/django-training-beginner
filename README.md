@@ -150,9 +150,18 @@ Une vue est un élément qui prend en entrée un objet de type HttpRequest et re
 Paramètres de la méthode render:
 - un objet request (de type HttpRequest)
 - le chemin vers le template généré
-- un dictionnaire 
-
-
+- un dictionnaire contextuel: chaque clé du dictionnaire devient une variable que nous pouvons utiliser pour indexer le modèle dans le fichier de gabarits.
+En effet, la clé est identifiée à sa valeur. Par exemple la définition `{'first_band': bands[0]})` au niveau de la vue, permet d'écrire: `{{ first_band.name }}`
+au niveau du template. Notons l'usage des accolades doubles.
+Cette écriture est équivalente à l'écriture Python: `band[0].name` pour indexer le champ name du 1er groupe (indice 0) du QuerySet.
+Les accolades doubles sont utilisées au niveau du gabarit pour injecter des appels au modèle via les variables passées par le dictionnaire contextuel de la vue.
+Prenons un deuxième exemple: le dictionnaire `{'bands': bands}` donne lieu dans le gabarit aux appels `{{ bands.i.name }}` avec _i_ l'indice du groupe dans le Queryset.      
+```
+- {{ bands.0.name }}
+- {{ bands.1.name }}
+- {{ bands.2.name }}
+```
+Notons qu'on ne fait pas `bands[i].name` comme en Python, en effet cette dernière écriture génèrerait une erreur.
 
 
 
