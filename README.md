@@ -128,7 +128,9 @@ Fichier HTML capable d'interpréter du code Python. Il peut donc recevoir des do
 - Le template se charge de l'affichage
 
 Jusqu'ici le fait de mettre du code HTML dans la vue est un anti-pattern et on le voit bien quand ce code HTML grossit.   
-En plus le `principe de responsabilité unique` est violé car la vue gère à la fois la logique (la logique-métier vu que la vue sélectionne tous les objets Band de la base de données) et la présentation (l'affichage -des noms des groupes...-).          
+En plus le `principe de responsabilité unique` est violé car la vue gère à la fois la logique (la logique renvoie à ce qui est logique, 
+et en ce qui concerne la vue, celle-ci est en relation avec le métier, elle sélectionne tous les objets Band de la base de données) et 
+la présentation (l'affichage -des noms des groupes...-).          
 Pour résoudre le problème, on va déplacer la partie présentation vers le gabarit.          
 
 *****Création du premier gabarit:*****       
@@ -177,7 +179,33 @@ Les gabarits sont un moyen pour définir le contenu d'une page qui ne change pas
 À l'intérieur de ces gabarits, nous insérons des variables de gabarits, qui servent d'espaces réservés pour le contenu qui change. 
 Lorsque nous générons un gabarit dans une vue, nous passons un dictionnaire de contexte au gabarit et les variables de contexte sont injectées dans leurs espaces respectifs.    
 En gardant la vue libre de tout code de présentation (HTML), nous pouvons limiter la responsabilité de la vue à une seule chose : 
-la logique pour récupérer les données correctes de la base de données, et les injecter dans la page.
+la logique pour récupérer les données correctes de la base de données, et les injecter dans la page.        
+
+Note sur la logique:
+Dans Django le système de gabarits est un outil qui contrôle la présentation et la logique liée à la présentation. La logique fait référence aux 
+boucles, embranchements (conditions)
+
+Optimisation dans l'utilisation des listes de modèle dans un gabarit:          
+Les boucles et autres instructions logiques sont entourées d'accolades et de signes de pourcentage (`{% ... %}`). Il s'agit de balises de gabarits.     
+On a les balises `for`, `endfor`, ... Attention à ne pas mettre les deux points à la fin comme en Python.   
+Pour le cas de la balise for, l'espace entre les balises for et endfor peut contenir du texte, du HTML et même des variables de gabarits Django.  
+On va proposer une autre écriture du bloc de code:
+```
+- {{ cle.0.name }}
+- {{ cle.1.name }}
+- {{ cle.2.name }}
+```
+En effet, dans la réalité on peut avoir un nombre d'objets dont on ne connait pas le nombre, on peut supprimer certains, etc. Et ce code ne marchera plus.
+On utilise la boucle `for` bien adaptée à l'itération sur une liste dont on ne connait pas la longueur à priori.   
+```
+<ul>
+    {% for band in bands %}
+    <li>{{ band.name }}</li>
+    {% endfor %}
+</ul>
+```
+Dans le bout de code ci-dessus on met la balise  `<li>` dans la boucle car on veut qu'elle se répète, tandis que la balise `<ul>` est hors de la boucle, 
+car on ne veut pas sa répétition.
 
 
 
