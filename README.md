@@ -248,7 +248,7 @@ Qui affiche  `"J'ai quelques groupes préférés."` si la longueur de la liste v
 
   *****Création/Extraction d'un gabarit de base, Ajout de feuilles de style (CSS) et de fichiers statiques*****
 
-***Création de gabarit de base- les balises block et extends***
+***Création de gabarit de base- les balises block et extends***                             
 On applique le principe `DRY : Don't Repeat Yourself`: Tout le code HTML qui se répète est factorisé et mis dans des fichiers qu'on appellera "gabarit de base", 
 et qu'on incluera dans le code grâce à la syntaxe `{% extends 'chemin-vers-le-gabarit-de-base.html' %}`.    
 Ici _chemin-vers-le-template-html_ est l'argument de la balise _extends_. Le mot clé _extends_ est choisi à dessein car fait référence à l'héritage.   
@@ -300,7 +300,7 @@ Pour que ça fonctionne, il reste un dernier détail, il faut ajouter la ligne `
 Cette instruction _load_ permet de _"charger la balise". Il faut penser aussi à relancer le serveur après la modification des fichiers statiques.
 
              
-*****Petite conclusion sur Django et l'architecture MVT*****    
+*****Petite conclusion sur Django et l'architecture MVT*****             
 Chaque élément de MVT a sa place : les modèles, les vues, les gabarits et même les modèles d'URL sont tous séparés dans leurs propres fichiers.
 
 Django est un framework monolithique. Il fournit des moteurs pour toutes les parties de l'application : moteur de gabarits pour la présentation, l'ORM pour la persistance, etc. 
@@ -319,6 +319,13 @@ Et votre application peut tenir dans un seul repository, car il n'est pas néces
 C'est pourquoi le rendu côté serveur avec Django est idéal pour les applications de démonstration et les applications à l’interface simple.
 
 Si les besoins de votre application évoluent par la suite, vous pouvez convertir votre projet Django et son rendu côté serveur en une API REST à l'aide du cadre Django REST.
+
+Quelques éléments qui ressortent du quizz:     
+- La balise `{% now "Y" %}` permet d'extraire l'année en cours
+- Quand on fait une modification au niveau du modèle il faut toujours générer les migrations et les exécuter sinon l'appel génèrera une erreur
+- Pour quitter le shell django on peut faire le classique `exit()` ou bien `Ctrl-D`
+- Pour avoir de l'aide sur les commandes _manage.py_ on peut faire `./manage.py help nom-commande` exemple `./manage.py help check`
+
 
 
 
