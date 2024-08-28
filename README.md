@@ -1,3 +1,5 @@
+# Django training beginner
+
 **Initialisation du projet** 
                 
 `django-admin startproject stockexchange` => pour initialiser un projet django (nommé ici *stockexchange*)       
@@ -241,6 +243,47 @@ Qui affiche  `"J'ai quelques groupes préférés."` si la longueur de la liste v
 - Nous injectons des données dans un gabarit à l'aide de variables de gabarits.
 
 - Nous utilisons les balises de gabarits pour les boucles, les embranchements et le formatage dans les gabarits.
+
+  ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  *****Création/Extraction d'un gabarit de base, Ajout de feuilles de style (CSS) et de fichiers statiques*****
+
+***Création de gabarit de base:***
+On applique le principe `DRY : Don't Repeat Yourself`: Tout le code HTML qui se répète est factorisé et mis dans des fichiers qu'on appellera "gabarit de base", 
+et qu'on incluera dans le code grâce à la syntaxe `{% extends 'chemin-vers-le-gabarit-de-base.html' %}`, ici _chemin-vers-le-template-htlm_ est donné suivant la convention 
+mentionnée plus haut (exemple: _listings/contact.html_) et est mis entre côtes.             
+
+Le code factorisé ressemble à ceci:
+
+```
+<html>
+    <head><title>Nom-de-l'application</title></head>
+    <body>
+
+        {% block content %}{% endblock content %}
+
+    </body>
+</html>
+```
+
+On met ce code dans un fichier _base.html_ par exemple.
+Dans ce code on reconnait bien la structure de base d'un fichier html, à laquelle on a ajouté la ligne avec la balise de gabarit:  `{% block %}` fermée par `{% endblock %}`.               
+`content` désigne ici le nom du bloc déclaré. La balise _block_ est une zone dans laquelle le code html propre à nos pages sera inséré.
+Le principe est celui de l'héritage (d'où le mot clé _extends_). Les gabarits (contact.html, about.html, ...) hériteront du gabarit de base et auront l'apparence suivante:   
+```
+{% extends ''chemin-vers-le-gabarit-de-base.html'' %}
+
+{% block content %}
+
+<h1>Hello Django !</h1>
+...
+</ul>
+
+{% endblock %}
+```
+Les balises `block` encadrent le code de la page. En général il faut enlever tout le html autour de la balise `body` (la balise `body` comprise) et encadrer le code restant 
+par les balises  `{% block %}` et `{% endblock %}`.
+  
 
 
 
