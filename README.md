@@ -1,3 +1,5 @@
+# Django training beginner
+
 **Initialisation du projet** 
                 
 `django-admin startproject stockexchange` => pour initialiser un projet django (nommé ici *stockexchange*)       
@@ -241,6 +243,88 @@ Qui affiche  `"J'ai quelques groupes préférés."` si la longueur de la liste v
 - Nous injectons des données dans un gabarit à l'aide de variables de gabarits.
 
 - Nous utilisons les balises de gabarits pour les boucles, les embranchements et le formatage dans les gabarits.
+
+  ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  *****Création/Extraction d'un gabarit de base, Ajout de feuilles de style (CSS) et de fichiers statiques*****
+
+***Création de gabarit de base- les balises block et extends***                             
+On applique le principe `DRY : Don't Repeat Yourself`: Tout le code HTML qui se répète est factorisé et mis dans des fichiers qu'on appellera "gabarit de base", 
+et qu'on incluera dans le code grâce à la syntaxe `{% extends 'chemin-vers-le-gabarit-de-base.html' %}`.    
+Ici _chemin-vers-le-template-html_ est l'argument de la balise _extends_. Le mot clé _extends_ est choisi à dessein car fait référence à l'héritage.   
+Par ailleur  _chemin-vers-le-template-html_ est donné suivant la convention mentionnée plus haut (tout comme _listings/contact.html_);          
+Notons qu'il est mis entre côtes.             
+
+Le code factorisé ressemble à ceci:
+```
+<html>
+    <head><title>Nom-de-l'application</title></head>
+    <body>
+
+        {% block content %}{% endblock content %}
+
+    </body>
+</html>
+```
+
+On met ce code dans un fichier _base.html_ par exemple.
+Dans ce code on reconnait bien la structure de base d'un fichier html, à laquelle on a ajouté la ligne avec la balise de gabarit:  `{% block %}` fermée par `{% endblock %}`.               
+`content` désigne ici le nom du bloc déclaré, il peut être ommis quand on n'a qu'une seule balise _block_. Notons que _content_ n'est pas mis entre côtes comme l'argument de la balise _extends_.        
+La balise _block_ est une zone dans laquelle le code html propre à nos pages sera inséré.
+Le principe est celui de l'héritage (d'où le mot clé _extends_). Les gabarits (contact.html, about.html, ...) hériteront du gabarit de base et auront l'apparence suivante:   
+```
+{% extends ''chemin-vers-le-gabarit-de-base.html'' %}
+
+{% block content %}
+
+<h1>Hello Django !</h1>
+...
+</ul>
+
+{% endblock %}
+```
+Les balises `block` encadrent le code de la page. En général il faut enlever tout le html autour de la balise `body` (la balise `body` comprise) et encadrer le code restant 
+par les balises  `{% block %}` et `{% endblock %}`.                    
+
+*****Utilisation de fichiers CSS*****                                 
+On crée un répertoire _static_ sous le répertoire de l'application (ici _listings_) dans lequel on mettra tout ce qui est supposé être statique durant nos développements, par exemple les fichiers CSS.   
+On utilise le même principe de nomenclature que dans les sections précédentes: listings/static/listings/"nom-fichier-statique".    
+Une fois le fichier défini on l'introduit par exemple dans le gabarit de base pour qu'il impacte toute l'application.    
+Pour un fichier _styles.css_ on a la déclaration suivante:
+
+```
+<link rel="stylesheet" href="{% static 'listings/styles.css' %}" />
+```
+Où _static_ indique le répertoire qui contient le fichier _'listings/styles.css'_; en d'autres termes le chemin peut s'écrire aussi:  _'static/listings/styles.css'_.           
+Pour que ça fonctionne, il reste un dernier détail, il faut ajouter la ligne `{% load static %}` en début du fichier gabarit de base (en dessous du DOCTYPE s'il y en a un ).
+Cette instruction _load_ permet de _"charger la balise". Il faut penser aussi à relancer le serveur après la modification des fichiers statiques.
+
+             
+*****Petite conclusion sur Django et l'architecture MVT*****             
+Chaque élément de MVT a sa place : les modèles, les vues, les gabarits et même les modèles d'URL sont tous séparés dans leurs propres fichiers.
+
+Django est un framework monolithique. Il fournit des moteurs pour toutes les parties de l'application : moteur de gabarits pour la présentation, l'ORM pour la persistance, etc. 
+Si l'on veut changer une de ces parties, il est peut-être préférable de construire une architecture MVC/T à partir des éléments de notre choix, comme Flask, SQLAlchemy, etc.
+
+MVC/T est un style d'architecture parmi d’autres. Il est très adapté aux applications CRUD simples. Mais pour les solutions d'entreprise, on peut regarder des alternatives comme Clean Architecture.     
+
+**********_Bonus: Le rendu côté serveur et côté client_**********                         
+Le rendu côté serveur est la manière « ancienne » de générer le contenu HTML d'une page web, où chaque chargement de page implique un aller-retour relativement lent vers le serveur.
+Aujourd'hui, il existe de nombreux frameworks permettant de créer des applications front-end riches dans le navigateur, 
+où le HTML est généré côté client et où seule une quantité minimale de données est envoyée entre le navigateur et le serveur, ce qui donne des applications rapides comme l'éclair.
+                            
+Mais cela ne signifie pas que vous devez ignorer le rendu côté serveur ! C'est un bon point de départ. Et pour de nombreuses applications, 
+le rendu côté serveur est une solution adéquate. Elle est simple à comprendre. Elle réduit la complexité de l'application car elle ne nécessite pas de construire une API REST. 
+Et votre application peut tenir dans un seul repository, car il n'est pas nécessaire d'avoir une application frontale JavaScript distincte. 
+C'est pourquoi le rendu côté serveur avec Django est idéal pour les applications de démonstration et les applications à l’interface simple.
+
+Si les besoins de votre application évoluent par la suite, vous pouvez convertir votre projet Django et son rendu côté serveur en une API REST à l'aide du cadre Django REST.
+
+Quelques éléments qui ressortent du quizz:     
+- La balise `{% now "Y" %}` permet d'extraire l'année en cours
+- Quand on fait une modification au niveau du modèle il faut toujours générer les migrations et les exécuter sinon l'appel génèrera une erreur
+- Pour quitter le shell django on peut faire le classique `exit()` ou bien `Ctrl-D`
+- Pour avoir de l'aide sur les commandes _manage.py_ on peut faire `./manage.py help nom-commande` exemple `./manage.py help check`
 
 
 
