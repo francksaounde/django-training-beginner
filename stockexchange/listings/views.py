@@ -21,4 +21,4 @@ def listings(request):
 
 
 def contact(request):
-    return HttpResponse("<h1> Nous contacter</h1> <p>Vous pouvez nous joindre via .... </p>")
+    return render(request, 'listings/contact.html')

@@ -1,18 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Hello</title>
-</head>
-<body>
+{% extends 'listings/base.html' %}
+
+{% block content %}
+
       <h1> Hello Django !</h1>
         <p> J'ai {{ bands|length }} groupes préférés qui sont: </p>
 
         <ul>
             {% for band in bands %}
-                <li>{{band.name|upper}}</li>
+                <li>
+                    {{band.name|upper}}
+                </li>
             {% endfor %}
         </ul>
 
-</body>
-</html>
+{% endblock %}
