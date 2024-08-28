@@ -286,7 +286,7 @@ Le principe est celui de l'héritage (d'où le mot clé _extends_). Les gabarits
 Les balises `block` encadrent le code de la page. En général il faut enlever tout le html autour de la balise `body` (la balise `body` comprise) et encadrer le code restant 
 par les balises  `{% block %}` et `{% endblock %}`.                    
 
-***** Utilisation de fichiers CSS *****      
+*****Utilisation de fichiers CSS*****                                 
 On crée un répertoire _static_ sous le répertoire de l'application (ici _listings_) dans lequel on mettra tout ce qui est supposé être statique durant nos développements, par exemple les fichiers CSS.   
 On utilise le même principe de nomenclature que dans les sections précédentes: listings/static/listings/"nom-fichier-statique".    
 Une fois le fichier défini on l'introduit par exemple dans le gabarit de base pour qu'il impacte toute l'application.    
@@ -308,7 +308,7 @@ Si l'on veut changer une de ces parties, il est peut-être préférable de const
 
 MVC/T est un style d'architecture parmi d’autres. Il est très adapté aux applications CRUD simples. Mais pour les solutions d'entreprise, on peut regarder des alternatives comme Clean Architecture.     
 
-**********_Bonus: Le rendu côté serveur et côté client_**********
+**********_Bonus: Le rendu côté serveur et côté client_**********                         
 Le rendu côté serveur est la manière « ancienne » de générer le contenu HTML d'une page web, où chaque chargement de page implique un aller-retour relativement lent vers le serveur.
 Aujourd'hui, il existe de nombreux frameworks permettant de créer des applications front-end riches dans le navigateur, 
 où le HTML est généré côté client et où seule une quantité minimale de données est envoyée entre le navigateur et le serveur, ce qui donne des applications rapides comme l'éclair.
