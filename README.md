@@ -348,8 +348,16 @@ enregistrements en bdd: la migration ne posera aucun souci. En effet, le champ e
 - blank= True dans le cadre des formulaire indique que le champ du formulaire associé peut être soumis vide (zone de texte vide par exemple)
 
 _Un type un peu sophistiqué: la liste de choix_         
-Une classe qui définit une liste de choix hérite de `models.TextChoices`
+Une classe qui définit une liste de choix hérite de `models.TextChoices`. 
+Pour chaque choix de la liste, on ajoute une constante (donc en majuscules) qu'on associe avec une clé qui est (dans notre cas) une abréviation de la constante.   
+Par exemple:
 
+```
+class Genre(models.TextChoices):
+        HIP_HOP = 'HH'
+        SYNTH_POP = 'SP'
+        ALTERNATIVE_ROCK = 'AR'
+```
                             
 
 
