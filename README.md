@@ -378,6 +378,18 @@ Ca donne: `genre = models.fields.CharField(choices=Genre.choices, max_length=5)`
 
 Nota: Django nomme ses tables au format _"nom-application underscore nom-modèle"_, par exemple: _listings_band_ pour désigner le modèle Band.
 
+*****Petit résumé (qui reprend plein de choses déjà dites plus haut)*****    
+- Django est livré avec différents types de champs qui correspondent à différents types de données, comme CharField ou IntegerField . 
+Il existe aussi des champs plus spécifiques qui vont contraindre l'entrée, comme URLField .
+
+- Nous pouvons définir des contraintes et des règles pour les champs en leur attribuant des options, comme max_length , null et choices .
+
+- Nous pouvons affiner davantage les contraintes sur les champs en spécifiant des validateurs sur les champs en utilisant l'option validators .
+
+- Lorsque nous ajoutons de nouveaux champs à un modèle, nous devons effectuer une migration pour ajouter de nouvelles colonnes à la base de données, avant de pouvoir commencer à les utiliser.
+
+- Si nous ajoutons des champs non nuls à un modèle, nous serons invités à leur fournir une valeur par défaut initiale lors de la migration.
+
    
 
 
