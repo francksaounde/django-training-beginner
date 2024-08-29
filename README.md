@@ -326,7 +326,16 @@ Quelques éléments qui ressortent du quizz:
 - Pour quitter le shell django on peut faire le classique `exit()` ou bien `Ctrl-D`
 - Pour avoir de l'aide sur les commandes _manage.py_ on peut faire `./manage.py help nom-commande` exemple `./manage.py help check`
 
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+*****Modèles et champs, gestion des données*****       
+_Types de données_            
+On a vu le type ``
+- models.fields.CharField(max_length=100)  pour une chaine de caractères de longueur max égale à 100.
+Notons que l'option `max_length` est obligatoire sinon une erreur sera générée 
+-  models.fields.IntegerField()  pour un nombre entier
+-  models.fields.BooleanField() pour une valeur booléenne
+-  models.fields.URLField() pour une URL (exemple l'url de la page d'accueil d'un site?)
 
 
 
