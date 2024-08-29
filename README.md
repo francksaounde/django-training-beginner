@@ -93,7 +93,9 @@ Avec les modèles Django, les choses se font différemment. Le framework examine
 - clé primaire : un identifiant unique pour chaque ligne de la table.          
 - Schéma : structure d'une base de données, en termes de tables et de colonnes
 
-La commande `python manage.py makemigrations` va générer les scripts SQL et la commande `python manage.py migrate` va les exécuter sur notre bdd       
+La commande `python manage.py makemigrations` va générer les scripts SQL et la commande `python manage.py migrate` va les exécuter sur notre bdd.               
+La commande `makemigrations` scanne le fichier models.py et fait le différentiel entre les deux états: ancien et nouveau,    
+puis génère les migrations pour que la bdd soit à jour avec le nouveau modèle.              
 
 ****Utilisation du shell django****: Le shell de Django est simplement un shell Python ordinaire qui exécute votre application Django. Il permet d'essayer du code en temps réel.       
 Pour ouvrir le shell faire la commande `python manage.py shell`.          
