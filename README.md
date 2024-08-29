@@ -366,7 +366,8 @@ Dans notre cas pratique on nous a aussi présenté le concept de _classe imbriqu
 Une fois la classe `Genre` définie, on peut déclarer un champ du modèle du type `Genre`, pour limiter la valeur du champ aux choix définis.
 Ca donne: `genre = models.fields.CharField(choices=Genre.choices, max_length=5)`           
 
-Nota: Django nomme ses tables au format _"nom-application underscore nom-modèle"_, par exemple: _listings_band_ pour désigner le modèle Band. 
+Nota: Django nomme ses tables au format _"nom-application underscore nom-modèle"_, par exemple: _listings_band_ pour désigner le modèle Band.
+
    
 
 
