@@ -368,6 +368,7 @@ Ca donne: `genre = models.fields.CharField(choices=Genre.choices, max_length=5)`
 
 Nota: Django nomme ses tables au format _"nom-application underscore nom-modèle"_, par exemple: _listings_band_ pour désigner le modèle Band.
 
+   
 
 
   
