@@ -329,13 +329,28 @@ Quelques éléments qui ressortent du quizz:
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 *****Modèles et champs, gestion des données*****       
-_Types de données_            
-On a vu le type ``
-- models.fields.CharField(max_length=100)  pour une chaine de caractères de longueur max égale à 100.
-Notons que l'option `max_length` est obligatoire sinon une erreur sera générée 
--  models.fields.IntegerField()  pour un nombre entier
--  models.fields.BooleanField() pour une valeur booléenne
--  models.fields.URLField() pour une URL (exemple l'url de la page d'accueil d'un site?)
+_Types de données et arguments_            
+Django nous propose nativement plusieurs types, en voici quelques uns:            
+- `models.fields.CharField(max_length=100)`  pour une chaine de caractères de longueur max égale à 100.
+L'argument (ou option de champ) `max_length` est obligatoire sinon une erreur sera générée. 
+-  `models.fields.IntegerField()` pour un nombre entier, exemple d'usage une année (quand on n'a pas besoin du mois et du jour)
+-  `models.fields.BooleanField()` pour une valeur booléenne (comme dans les cas classiques _True_ ou _False_) 
+-  `models.fields.URLField()` pour une URL (exemple l'url de la page d'accueil d'un site?)
+
+  Pour la date, on passe en argument une contrainte de type liste de validateurs à l'option `validators` pour encadrer la date 
+  entre un minimum (instance de la classe `MinValueValidator`) et un maximum (instance de `MaxValueValidator`). Les 2 classes de validators sont 
+  importées de `django.core.validators`.
+
+_Valeurs par défaut_:                
+- default: pour un booléen par exemple
+- null= True permet d'indiquer que le champ peut ne pas être renseigné en bdd; pour de tels champs on n'a pas en s'en faire s'il existe déjà des
+enregistrements en bdd: la migration ne posera aucun souci. En effet, le champ en bdd peut avoir la valeur NULL.
+- blank= True dans le cadre des formulaire indique que le champ du formulaire associé peut être soumis vide (zone de texte vide par exemple)
+
+_Un type un peu sophistiqué: la liste de choix_         
+Une classe qui définit une liste de choix hérite de `models.TextChoices`
+
+                            
 
 
 
