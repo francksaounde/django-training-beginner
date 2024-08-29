@@ -325,7 +325,7 @@ Si les besoins de votre application évoluent par la suite, vous pouvez converti
 Quelques éléments qui ressortent du quizz:     
 - La balise `{% now "Y" %}` permet d'extraire l'année en cours
 - Quand on fait une modification au niveau du modèle il faut toujours générer les migrations et les exécuter sinon l'appel génèrera une erreur
-- Pour quitter le shell django on peut faire le classique `exit()` ou bien `Ctrl-D`
+- Pour quitter le shell django on peut faire le classique `exit()` ou bien `Ctrl-D` (cette dernière ne marche pas pendant mes tests, peut-être ça vaut pour un Mac?)
 - Pour avoir de l'aide sur les commandes _manage.py_ on peut faire `./manage.py help nom-commande` exemple `./manage.py help check`
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
