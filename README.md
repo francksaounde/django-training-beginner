@@ -1,4 +1,4 @@
-# Django training beginner
+# Django training beginner (based on openclassrooms)
 
 **Initialisation du projet** 
                 
@@ -329,7 +329,8 @@ Quelques éléments qui ressortent du quizz:
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 *****Modèles et champs, gestion des données*****       
-_Types de données et arguments_            
+
+*****_Types de données et arguments_*****            
 Django nous propose nativement plusieurs types, en voici quelques uns:            
 - `models.fields.CharField(max_length=100)`  pour une chaine de caractères de longueur max égale à 100.
 L'argument (ou option de champ) `max_length` est obligatoire sinon une erreur sera générée. 
@@ -341,13 +342,15 @@ L'argument (ou option de champ) `max_length` est obligatoire sinon une erreur se
   entre un minimum (instance de la classe `MinValueValidator`) et un maximum (instance de `MaxValueValidator`). Les 2 classes de validators sont 
   importées de `django.core.validators`.
 
-_Valeurs par défaut_:                
+*****_Valeurs par défaut_*****:                
 - default: pour un booléen par exemple
 - null= True permet d'indiquer que le champ peut ne pas être renseigné en bdd; pour de tels champs on n'a pas en s'en faire s'il existe déjà des
-enregistrements en bdd: la migration ne posera aucun souci. En effet, le champ en bdd peut avoir la valeur NULL.
+enregistrements en bdd: la migration ne posera aucun souci. En effet, le champ en bdd peut avoir la valeur NULL.                
+Nota: Quand on ajoute un nouveau champ dans une bdd qui possède déjà des enregistrements il faut faire attention aux valeurs par défaut.
+Si la valeur par défaut n'est pas valide, la migration génèrera une erreur.
 - blank= True dans le cadre des formulaire indique que le champ du formulaire associé peut être soumis vide (zone de texte vide par exemple)
 
-_Un type un peu sophistiqué: la liste de choix_         
+*****_Un type un peu sophistiqué: la liste de choix_*****         
 Une classe qui définit une liste de choix hérite de `models.TextChoices`. 
 Pour chaque choix de la liste, on ajoute une constante (donc en majuscules) qu'on associe avec une clé qui est (dans notre cas) une abréviation de la constante.   
 Par exemple:
@@ -358,7 +361,12 @@ class Genre(models.TextChoices):
         SYNTH_POP = 'SP'
         ALTERNATIVE_ROCK = 'AR'
 ```
-                            
+
+Dans notre cas pratique on nous a aussi présenté le concept de _classe imbriquée_ avec Django: une classe définie dans une autre avec laquelle très étroitement liée.        
+Une fois la classe `Genre` définie, on peut déclarer un champ du modèle du type `Genre`, pour limiter la valeur du champ aux choix définis.
+Ca donne: `genre = models.fields.CharField(choices=Genre.choices, max_length=5)`           
+
+Nota: Django nomme ses tables au format _"nom-application underscore nom-modèle"_, par exemple: _listings_band_ pour désigner le modèle Band.
 
 
 
