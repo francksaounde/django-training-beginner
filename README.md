@@ -1,6 +1,6 @@
 # Django training beginner (based on openclassrooms)
 
-**Initialisation du projet** 
+### Initialisation du projet         
                 
 `django-admin startproject stockexchange` => pour initialiser un projet django (nommé ici *stockexchange*)       
 Cette commande d'initialisation crée un répertoire pour le projet et à l'intérieur du répertoire il y a 3 éléments:
@@ -39,7 +39,7 @@ Nous vérifions que tout fonctionne comme il se doit en naviguant vers le front-
 
 ***************************************************************************************************************************************************
 
-**Première vue Django**                    
+### Première vue Django                           
 Une vue a pour fonction de répondre à la visite d'un utilisateur sur le site en renvoyant une page que l’utilisateur peut voir.    
 Elle prend en paramètre un *objet HttpRequest* et retourne un *objet HttpResponse*.    
 - Par convention l'objet HttpRequest est appelé "request" sans précision sur son type. Cet objet contient des attributs utiles liés à la requête de l'user.   
@@ -67,7 +67,7 @@ La demande HTTP est transmise à la vue spécifiée.
 
 -------------------------------------------------------------------------------------------------------------------------------------------------
 
-***Modèle Django***
+### Modèle Django        
 
 Il nous servira à afficher les données dans nos pages.                    
 Grâce à l'ORM on passe des classes aux tables de façon implicite.                     
@@ -248,7 +248,7 @@ Qui affiche  `"J'ai quelques groupes préférés."` si la longueur de la liste v
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-### Création/Extraction d'un gabarit de base, Ajout de feuilles de style (CSS) et de fichiers statiques     
+### Création/Extraction d'un gabarit de base - Ajout de feuilles de style (CSS) et de fichiers statiques     
 
 ***Création de gabarit de base- les balises block et extends***                             
 On applique le principe `DRY : Don't Repeat Yourself`: Tout le code HTML qui se répète est factorisé et mis dans des fichiers qu'on appellera "gabarit de base", 
@@ -330,9 +330,9 @@ Quelques éléments qui ressortent du quizz:
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-*****Modèles et champs, gestion des données*****       
+### Modèles et champs, gestion des données       
 
-*****_Types de données et arguments_*****            
+*****Types de données et arguments*****            
 Django nous propose nativement plusieurs types, en voici quelques uns:            
 - `models.fields.CharField(max_length=100)`  pour une chaine de caractères de longueur max égale à 100.
 L'argument (ou option de champ) `max_length` est obligatoire sinon une erreur sera générée. 
