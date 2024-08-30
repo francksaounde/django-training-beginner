@@ -246,9 +246,9 @@ Qui affiche  `"J'ai quelques groupes préférés."` si la longueur de la liste v
 
 - Nous utilisons les balises de gabarits pour les boucles, les embranchements et le formatage dans les gabarits.
 
-  ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  *****Création/Extraction d'un gabarit de base, Ajout de feuilles de style (CSS) et de fichiers statiques*****
+### Création/Extraction d'un gabarit de base, Ajout de feuilles de style (CSS) et de fichiers statiques     
 
 ***Création de gabarit de base- les balises block et extends***                             
 On applique le principe `DRY : Don't Repeat Yourself`: Tout le code HTML qui se répète est factorisé et mis dans des fichiers qu'on appellera "gabarit de base", 
