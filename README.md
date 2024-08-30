@@ -342,7 +342,7 @@ L'argument (ou option de champ) `max_length` est obligatoire sinon une erreur se
 
   Pour la date, on passe en argument une contrainte de type liste de validateurs à l'option `validators` pour encadrer la date 
   entre un minimum (instance de la classe `MinValueValidator`) et un maximum (instance de `MaxValueValidator`). Les 2 classes de validators sont 
-  importées de `django.core.validators`.
+  importées de `django.core.validators`.         
 
 *****_Valeurs par défaut_*****:                
 - default: pour un booléen par exemple
@@ -374,7 +374,8 @@ class Genre(models.TextChoices):
 
 Dans notre cas pratique on nous a aussi présenté le concept de _classe imbriquée_ avec Django: une classe définie dans une autre avec laquelle très étroitement liée.        
 Une fois la classe `Genre` définie, on peut déclarer un champ du modèle du type `Genre`, pour limiter la valeur du champ aux choix définis.
-Ca donne: `genre = models.fields.CharField(choices=Genre.choices, max_length=5)`           
+Ca donne: `genre = models.fields.CharField(choices=Genre.choices, max_length=5)`. En tant que champ de type `CharField`, il faut préciser la longueur maximale
+d'où l'argument `max_length`           
 
 Nota: Django nomme ses tables au format _"nom-application underscore nom-modèle"_, par exemple: _listings_band_ pour désigner le modèle Band.
 
