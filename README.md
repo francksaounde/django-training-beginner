@@ -123,7 +123,7 @@ On met ce code dans une vue.
 
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-***Gabarit (ou template) Django***      
+### Gabarit (ou template) Django      
 Fichier HTML capable d'interpréter du code Python. Il peut donc recevoir des données depuis le modèle et intégrer des mécanismes comme des boucles.           
 
 ************_Rappel sur le design pattern MVT:_************
