@@ -374,8 +374,8 @@ class Genre(models.TextChoices):
 
 Dans notre cas pratique on nous a aussi présenté le concept de _classe imbriquée_ avec Django: une classe définie dans une autre avec laquelle très étroitement liée.        
 Une fois la classe `Genre` définie, on peut déclarer un champ du modèle du type `Genre`, pour limiter la valeur du champ aux choix définis.
-Ca donne: `genre = models.fields.CharField(choices=Genre.choices, max_length=5)`. En tant que champ de type `CharField`, il faut préciser la longueur maximale
-d'où l'argument `max_length`           
+Ca donne: `genre = models.fields.CharField(choices=Genre.choices, max_length=5)`. En tant que champ de type `CharField`, il faut préciser la longueur maximale de la clé
+d'où l'argument `max_length`. Ici on a des clés de deux caractères mais on préfère être large et réserver 5 caractères.                          
 
 Nota: Django nomme ses tables au format _"nom-application underscore nom-modèle"_, par exemple: _listings_band_ pour désigner le modèle Band.
 
