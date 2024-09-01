@@ -336,28 +336,30 @@ Quelques éléments qui ressortent du quizz:
 Django nous propose nativement plusieurs types, en voici quelques uns:            
 - `models.fields.CharField(max_length=100)`  pour une chaine de caractères de longueur max égale à 100.
 L'argument (ou option de champ) `max_length` est obligatoire sinon une erreur sera générée. 
--  `models.fields.IntegerField()` pour un nombre entier, exemple d'usage une année (quand on n'a pas besoin du mois et du jour)
+-  `models.fields.IntegerField()` pour un nombre entier, par exemple pour déclarer une année (quand on n'a pas besoin du mois et du jour)
 -  `models.fields.BooleanField()` pour une valeur booléenne (comme dans les cas classiques _True_ ou _False_) 
 -  `models.fields.URLField()` pour une URL (exemple l'url de la page d'accueil d'un site?)
 
   Pour la date, on passe en argument une contrainte de type liste de validateurs à l'option `validators` pour encadrer la date 
-  entre un minimum (instance de la classe `MinValueValidator`) et un maximum (instance de `MaxValueValidator`). Les 2 classes de validators sont 
-  importées de `django.core.validators`.         
+  entre un minimum (instance de la classe `MinValueValidator`) et un maximum (instance de `MaxValueValidator`).          
+  Les 2 classes de validators (`MinValueValidator` et `MaxValueValidator`) sont importées de `django.core.validators`.          
 
 *****_Valeurs par défaut_*****:                
-- default: pour un booléen par exemple
-- blank= True dans le cadre des formulaire indique que le champ du formulaire associé peut être soumis vide (zone de texte vide par exemple)
-- null= True permet d'indiquer que le champ peut ne pas être renseigné en bdd; pour de tels champs on n'a pas en s'en faire s'il existe déjà des
+- `default`: pour un booléen par exemple
+- `blank = True` dans le cadre des formulaires, indique que le champ du formulaire associé peut être soumis vide (zone de texte vide par exemple)
+- `null = True` permet d'indiquer que le champ peut ne pas être renseigné en bdd; pour de tels champs on n'a pas en s'en faire s'il existe déjà des
 enregistrements en bdd: la migration ne posera aucun souci. En effet, le champ en bdd peut avoir la valeur NULL.                
-Nota: a) Quand on ajoute un nouveau champ dans une bdd qui possède déjà des enregistrements il faut faire attention aux valeurs par défaut.
+*****Nota:*****     
+a) Quand on ajoute un nouveau champ dans une bdd qui possède déjà des enregistrements il faut faire attention aux valeurs par défaut.
 Si la valeur par défaut n'est pas valide, la migration génèrera une erreur.
 Et dans le cas d'une valeur par défaut non valide, Django propose 2 options: fournir nous-mêmes une valeur par défaut (_Provide a one-off default now_),
 sinon le laisser proposer la valeur par défaut qu'il veut... Une fois les migrations générées, les appliquer par `python manage.py migrate`
 
 b) Quand on instancie un modèle les champs pour lesquels on n'a pas renseigné la valeur prennent:
 - la valeur par défaut du champ si c'est un champ natif (exemple _chaîne de caractères vide_ pour un _Charfield_)
-- la valeur `None` pour les autres, et *****la valeur None correspond à une valeur NULL en bdd*****. Par exemple l'année (qui est de type IntegerField) est à None si on instancie sans donner de valeur.
-Du coup si on fait `save` dans le _shell_ on a une erreur liée à une contrainte d'intégrité 
+- la valeur `None` pour les autres, et *****la valeur None correspond à une valeur NULL en bdd*****.
+Par exemple l'année (qui est de type IntegerField) est à None si on instancie sans donner de valeur (`band = Band()`).
+Du coup si on fait ` band.save()`, dans le _shell_ on a une erreur liée à une contrainte d'intégrité. 
 
 
 *****_Un type un peu sophistiqué: la liste de choix_*****         
