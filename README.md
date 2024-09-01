@@ -1,6 +1,6 @@
-# Django training beginner
+# Django training beginner (based on openclassrooms)
 
-**Initialisation du projet** 
+### Initialisation du projet         
                 
 `django-admin startproject stockexchange` => pour initialiser un projet django (nommé ici *stockexchange*)       
 Cette commande d'initialisation crée un répertoire pour le projet et à l'intérieur du répertoire il y a 3 éléments:
@@ -39,7 +39,7 @@ Nous vérifions que tout fonctionne comme il se doit en naviguant vers le front-
 
 ***************************************************************************************************************************************************
 
-**Première vue Django**                    
+### Première vue Django                           
 Une vue a pour fonction de répondre à la visite d'un utilisateur sur le site en renvoyant une page que l’utilisateur peut voir.    
 Elle prend en paramètre un *objet HttpRequest* et retourne un *objet HttpResponse*.    
 - Par convention l'objet HttpRequest est appelé "request" sans précision sur son type. Cet objet contient des attributs utiles liés à la requête de l'user.   
@@ -67,7 +67,7 @@ La demande HTTP est transmise à la vue spécifiée.
 
 -------------------------------------------------------------------------------------------------------------------------------------------------
 
-***Modèle Django***
+### Modèle Django        
 
 Il nous servira à afficher les données dans nos pages.                    
 Grâce à l'ORM on passe des classes aux tables de façon implicite.                     
@@ -93,7 +93,9 @@ Avec les modèles Django, les choses se font différemment. Le framework examine
 - clé primaire : un identifiant unique pour chaque ligne de la table.          
 - Schéma : structure d'une base de données, en termes de tables et de colonnes
 
-La commande `python manage.py makemigrations` va générer les scripts SQL et la commande `python manage.py migrate` va les exécuter sur notre bdd       
+La commande `python manage.py makemigrations` va générer les scripts SQL et la commande `python manage.py migrate` va les exécuter sur notre bdd.               
+La commande `makemigrations` scanne le fichier models.py et fait le différentiel entre les deux états: ancien et nouveau,    
+puis génère les migrations pour que la bdd soit à jour avec le nouveau modèle.              
 
 ****Utilisation du shell django****: Le shell de Django est simplement un shell Python ordinaire qui exécute votre application Django. Il permet d'essayer du code en temps réel.       
 Pour ouvrir le shell faire la commande `python manage.py shell`.          
@@ -121,7 +123,7 @@ On met ce code dans une vue.
 
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-***Gabarit (ou template) Django***      
+### Gabarit (ou template) Django      
 Fichier HTML capable d'interpréter du code Python. Il peut donc recevoir des données depuis le modèle et intégrer des mécanismes comme des boucles.           
 
 ************_Rappel sur le design pattern MVT:_************
@@ -244,9 +246,9 @@ Qui affiche  `"J'ai quelques groupes préférés."` si la longueur de la liste v
 
 - Nous utilisons les balises de gabarits pour les boucles, les embranchements et le formatage dans les gabarits.
 
-  ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  *****Création/Extraction d'un gabarit de base, Ajout de feuilles de style (CSS) et de fichiers statiques*****
+### Création/Extraction d'un gabarit de base - Ajout de feuilles de style (CSS) et de fichiers statiques     
 
 ***Création de gabarit de base- les balises block et extends***                             
 On applique le principe `DRY : Don't Repeat Yourself`: Tout le code HTML qui se répète est factorisé et mis dans des fichiers qu'on appellera "gabarit de base", 
@@ -323,11 +325,76 @@ Si les besoins de votre application évoluent par la suite, vous pouvez converti
 Quelques éléments qui ressortent du quizz:     
 - La balise `{% now "Y" %}` permet d'extraire l'année en cours
 - Quand on fait une modification au niveau du modèle il faut toujours générer les migrations et les exécuter sinon l'appel génèrera une erreur
-- Pour quitter le shell django on peut faire le classique `exit()` ou bien `Ctrl-D`
+- Pour quitter le shell django on peut faire le classique `exit()` ou bien `Ctrl-D` (cette dernière ne marche pas pendant mes tests, peut-être ça vaut pour un Mac?)
 - Pour avoir de l'aide sur les commandes _manage.py_ on peut faire `./manage.py help nom-commande` exemple `./manage.py help check`
 
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+### Modèles et champs, gestion des données       
+
+*****Types de données et arguments*****            
+Django nous propose nativement plusieurs types, en voici quelques uns:            
+- `models.fields.CharField(max_length=100)`  pour une chaine de caractères de longueur max égale à 100.
+L'argument (ou option de champ) `max_length` est obligatoire sinon une erreur sera générée. 
+-  `models.fields.IntegerField()` pour un nombre entier, par exemple pour déclarer une année (quand on n'a pas besoin du mois et du jour)
+-  `models.fields.BooleanField()` pour une valeur booléenne (comme dans les cas classiques _True_ ou _False_) 
+-  `models.fields.URLField()` pour une URL (exemple l'url de la page d'accueil d'un site?)
+
+  Pour la date, on passe en argument une contrainte de type liste de validateurs à l'option `validators` pour encadrer la date 
+  entre un minimum (instance de la classe `MinValueValidator`) et un maximum (instance de `MaxValueValidator`).          
+  Les 2 classes de validators (`MinValueValidator` et `MaxValueValidator`) sont importées de `django.core.validators`.          
+
+*****_Valeurs par défaut_*****:                
+- `default`: pour un booléen par exemple
+- `blank = True` dans le cadre des formulaires, indique que le champ du formulaire associé peut être soumis vide (zone de texte vide par exemple)
+- `null = True` permet d'indiquer que le champ peut ne pas être renseigné en bdd; pour de tels champs on n'a pas en s'en faire s'il existe déjà des
+enregistrements en bdd: la migration ne posera aucun souci. En effet, le champ en bdd peut avoir la valeur NULL.
+
+*****Nota:*****     
+a) Quand on ajoute un nouveau champ dans une bdd qui possède déjà des enregistrements il faut faire attention aux valeurs par défaut.
+Si la valeur par défaut n'est pas valide, la migration génèrera une erreur.
+Et dans le cas d'une valeur par défaut non valide, Django propose 2 options: fournir nous-mêmes une valeur par défaut (_Provide a one-off default now_),
+sinon le laisser proposer la valeur par défaut qu'il veut... Une fois les migrations générées, les appliquer par `python manage.py migrate`
+
+b) Quand on instancie un modèle les champs pour lesquels on n'a pas renseigné la valeur prennent:
+- la valeur par défaut du champ si c'est un champ natif (exemple _chaîne de caractères vide_ pour un _Charfield_)
+- la valeur `None` pour les autres, et *****la valeur None correspond à une valeur NULL en bdd*****.
+Par exemple l'année (qui est de type IntegerField) est à None si on instancie sans donner de valeur (`band = Band()`).
+Du coup si on fait ` band.save()`, dans le _shell_ on a une erreur liée à une contrainte d'intégrité. 
 
 
+*****_Un type un peu sophistiqué: la liste de choix_*****         
+Une classe qui définit une liste de choix hérite de `models.TextChoices`. 
+Pour chaque choix de la liste, on ajoute une constante (donc en majuscules) qu'on associe avec une clé qui est (dans notre cas) une abréviation de la constante.   
+Par exemple:
+
+```
+class Genre(models.TextChoices):
+        HIP_HOP = 'HH'
+        SYNTH_POP = 'SP'
+        ALTERNATIVE_ROCK = 'AR'
+```
+
+Dans notre cas pratique on nous a aussi présenté le concept de _classe imbriquée_ avec Django: une classe définie dans une autre avec laquelle très étroitement liée.        
+Une fois la classe `Genre` définie, on peut déclarer un champ du modèle du type `Genre`, pour limiter la valeur du champ aux choix définis.
+Ca donne: `genre = models.fields.CharField(choices=Genre.choices, max_length=5)`. En tant que champ de type `CharField`, il faut préciser la longueur maximale de la clé
+d'où l'argument `max_length`. Ici on a des clés de deux caractères mais on préfère être large et réserver 5 caractères.                          
+
+Nota: Django nomme ses tables au format _"nom-application underscore nom-modèle"_, par exemple: _listings_band_ pour désigner le modèle Band.
+
+*****Petit résumé (qui reprend plein de choses déjà dites plus haut)*****    
+- Django est livré avec différents types de champs qui correspondent à différents types de données, comme CharField ou IntegerField . 
+Il existe aussi des champs plus spécifiques qui vont contraindre l'entrée, comme URLField .
+
+- Nous pouvons définir des contraintes et des règles pour les champs en leur attribuant des options, comme max_length , null et choices .
+
+- Nous pouvons affiner davantage les contraintes sur les champs en spécifiant des validateurs sur les champs en utilisant l'option validators .
+
+- Lorsque nous ajoutons de nouveaux champs à un modèle, nous devons effectuer une migration pour ajouter de nouvelles colonnes à la base de données, avant de pouvoir commencer à les utiliser.
+
+- Si nous ajoutons des champs non nuls à un modèle, nous serons invités à leur fournir une valeur par défaut initiale lors de la migration.
+
+   
 
 
   
