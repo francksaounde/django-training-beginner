@@ -348,7 +348,8 @@ L'argument (ou option de champ) `max_length` est obligatoire sinon une erreur se
 - `default`: pour un booléen par exemple
 - `blank = True` dans le cadre des formulaires, indique que le champ du formulaire associé peut être soumis vide (zone de texte vide par exemple)
 - `null = True` permet d'indiquer que le champ peut ne pas être renseigné en bdd; pour de tels champs on n'a pas en s'en faire s'il existe déjà des
-enregistrements en bdd: la migration ne posera aucun souci. En effet, le champ en bdd peut avoir la valeur NULL.                
+enregistrements en bdd: la migration ne posera aucun souci. En effet, le champ en bdd peut avoir la valeur NULL.
+
 *****Nota:*****     
 a) Quand on ajoute un nouveau champ dans une bdd qui possède déjà des enregistrements il faut faire attention aux valeurs par défaut.
 Si la valeur par défaut n'est pas valide, la migration génèrera une erreur.
