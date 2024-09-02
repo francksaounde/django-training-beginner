@@ -358,8 +358,8 @@ sinon le laisser proposer la valeur par défaut qu'il veut... Une fois les migra
 
 b) Quand on instancie un modèle les champs pour lesquels on n'a pas renseigné la valeur prennent:
 - la valeur par défaut du champ si c'est un champ natif (exemple _chaîne de caractères vide_ pour un _Charfield_)
-- la valeur `None` pour les autres, et *****la valeur None correspond à une valeur NULL en bdd*****.
-Par exemple l'année (qui est de type IntegerField) est à None si on instancie sans donner de valeur (`band = Band()`).
+- la valeur `None` pour les autres, et *****la valeur None correspond à une valeur NULL en bdd*****.               
+Par exemple l'année (qui est de type IntegerField) est à None si on instancie sans donner de valeur (`band = Band()`).             
 Du coup si on fait ` band.save()`, dans le _shell_ on a une erreur liée à une contrainte d'intégrité. 
 
 
