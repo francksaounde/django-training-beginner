@@ -387,14 +387,14 @@ Nota: Django nomme ses tables au format _"nom-application underscore nom-modèle
 Il existe aussi des champs plus spécifiques qui vont contraindre l'entrée, comme URLField .
 
 - Nous pouvons définir des contraintes et des règles pour les champs en leur attribuant des options, comme max_length , null et choices .
-
 - Nous pouvons affiner davantage les contraintes sur les champs en spécifiant des validateurs sur les champs en utilisant l'option validators .
-
 - Lorsque nous ajoutons de nouveaux champs à un modèle, nous devons effectuer une migration pour ajouter de nouvelles colonnes à la base de données, avant de pouvoir commencer à les utiliser.
-
 - Si nous ajoutons des champs non nuls à un modèle, nous serons invités à leur fournir une valeur par défaut initiale lors de la migration.
 
-   
+  -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+   ### CRUD et Administration Django
+  
 
 
   
