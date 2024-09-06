@@ -403,12 +403,30 @@ C'est fait via la commande: `admin.site.register(Band)`, *Band* désigne le nom 
 L'utilisation de ce site d'admin permet de bien comprendre ce que signifie `blank=True`.
 Pour consulter un modèle particulier enregistré sur le site d'admin par la commande précédente, on accède à l'url:
 `http://127.0.0.1:8000/admin/listings/band/ ` ou plus généralement `http://127.0.0.1:8000/admin/<nom-application>/<nom-du-modèle>/ `
-  
+                                         
 Le site d'administration est une interface back-end prévue pour les devs mais surtout les admins, pour effectuer facilement des tests et 
-les interfaces CRUD. Pour les end-users il faudra souvent faire des personnalisés de formulaires.
+les opérations CRUD (donc sans passer par le shell Django notamment). Pour les end-users ce sera une interface front-end et il faudra souvent faire des personnalisés de formulaires.
 
-  
-                    
+=> Petite personnalisation qu'on peut faire pour un modèle:           
+Le bout de code ci-après (ajouté dans models.py) permet d'afficher les noms des modèles(ici Band) dans la vue en liste de l'interface d'administration:           
+```
+class Band(models.Model):
+   def __str__(self):
+    return f'{self.name}'
+```
+Pour avoir plus de détail, on peut afficher plus de colonnes dans la vue en liste (de l'interface d'admin).  
+Pour cela il suffit d'ajouter dans `admin.py` une classe qui hérite de `admin.ModelAdmin` et qui définit la variable `list_display`.
+Cette classe qui hérite de `admin.ModelAdmin` est souvent notée <nom-du-modèle>-suivi-de-Admin, ça nous donne par exemple: `BandAdmin` pour la classe Band.      
+`list_display` est un tuple formé des noms des champs du modèle qu'on veut voir affichés dans l'interface.       
+Après la définition de la classe on l'enregistre sur le site d'administration par convention avec le modèle dont elle gère l'affichage.      
+On a donc la définition suivante:
+```
+class BandAdmin(admin.ModelAdmin):
+list_display = ('name', 'year_formed', 'genre') # liste les champs que nous voulons sur l'affichage de la liste
+
+admin.site.register(Band, BandAdmin) 
+```
+          
 
 
 
