@@ -396,7 +396,7 @@ Il existe aussi des champs plus spécifiques qui vont contraindre l'entrée, com
    ### CRUD et Administration Django
 
   On commence par créer un utilisateur admin par la commande: `python manage.py createsuperuser`.
-  Pour ce user l'email n'est pas obligatoire, mais il est conseillé de renseigner un password pour pouvoir se connecter par la suite.
+  Pour ce user l'email n'est pas obligatoire, mais il est conseillé de renseigner un password pour pouvoir se connecter par la suite à `http://127.0.0.1:8000/admin/`.      
 
   => on déclare dans le fichier `admin.py` qu'on veut gérer le modèle en spécifique dans le site d'administration de Django.
 C'est fait via la commande: `admin.site.register(Band)`, *Band* désigne le nom du modèle.
@@ -415,9 +415,9 @@ class Band(models.Model):
     return f'{self.name}'
 ```
 Pour avoir plus de détail, on peut afficher plus de colonnes dans la vue en liste (de l'interface d'admin).  
-Pour cela il suffit d'ajouter dans `admin.py` une classe qui hérite de `admin.ModelAdmin` et qui définit la variable `list_display`.
+Pour cela il suffit d'ajouter dans `admin.py` une classe qui hérite de `admin.ModelAdmin` et qui définit l'attribut de classe variable `list_display`.
 Cette classe qui hérite de `admin.ModelAdmin` est souvent notée <nom-du-modèle>-suivi-de-Admin, ça nous donne par exemple: `BandAdmin` pour la classe Band.      
-`list_display` est un tuple formé des noms des champs du modèle qu'on veut voir affichés dans l'interface.       
+`list_display` est un tuple formé des noms des champs du modèle qu'on veut voir affichés dans la vue en liste (de l'interface d'admin).       
 Après la définition de la classe on l'enregistre sur le site d'administration par convention avec le modèle dont elle gère l'affichage.      
 On a donc la définition suivante:
 ```
@@ -426,6 +426,7 @@ list_display = ('name', 'year_formed', 'genre') # liste les champs que nous voul
 
 admin.site.register(Band, BandAdmin) 
 ```
+
           
 
 
