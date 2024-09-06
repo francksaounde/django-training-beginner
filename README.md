@@ -427,7 +427,34 @@ list_display = ('name', 'year_formed', 'genre') # liste les champs que nous voul
 admin.site.register(Band, BandAdmin) 
 ```
 
-          
+### Relation Many-to-one, One-to-Many avec champ ForeignKey (clé étrangère)
+Il s'agit simplement des relations de type un-à-plusieurs de la modélisation des données.
+Considérons le cas où un article ne peut pas être lié à la fois à deux groupes (Band) différents.
+On a donc une relation 1 à plusieurs et la clé du groupe va migrer vers l'article. L'ajout de cette clé dans la table article (annonce) se fait par la ligne:   
+```
+class Listing(models.Model):
+   band = models.ForeignKey(Band, null=True, on_delete=models.SET_NULL)
+```
+Cette référence permet d'obtenir par des requêtes le groupe de d'importe quelle annonce (ou article) en faisant `listing.band`.    
+On passe trois arguments à `ForeignKey`:
+- le modèle auquel on veut se rattacher: `Band`;
+- `null=True`: pour créer les annonces(articles) même si elles ne sont pas directement liées à un groupe;
+-  L'argument `on_delete` permet de définir la stratégie à suivre lorsque les objets `Band` sont supprimés.
+ Il existe de multiples options pour cela, par exemple:           
+- définir le champ band comme ****null**** en utilisant `models.SET_NULL`,
+- définir le champ band à sa ****valeur par défaut**** en utilisant `models.SET_DEFAULT`,
+- ****supprimer**** l'objet Listing en utilisant `models.CASCADE`,
+- et d'autres paramètres plus complexes décrits dans la documentation de Django.
+  Dans notre cas, on a choisi `models.SET_NULL` car on ne veut pas supprimer l'objet `Listing` si un `Band` est supprimé.
+
+  Nota: Une fois les modifs effectuées ne pas oublier d'appliquer les migrations.
+
+  Astuce: Pour voir les groupes associés (liés) aux articles, il suffit d'ajouter le champ `band` au `ListingAdmin`dans `admin.py`
+  ```
+  class ListingAdmin(admin.ModelAdmin):
+  list_display = ('title', 'band')  
+  ```
+
 
 
 
