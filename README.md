@@ -394,8 +394,18 @@ Il existe aussi des champs plus spécifiques qui vont contraindre l'entrée, com
   -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
    ### CRUD et Administration Django
-  
 
+  On commence par créer un utilisateur admin par la commande: `python manage.py createsuperuser`.
+  Pour ce user l'email n'est pas obligatoire, mais il est conseillé de renseigner un password pour pouvoir se connecter par la suite.
+
+  => on déclare dans le fichier `admin.py` qu'on veut gérer le modèle en spécifique dans le site d'administration de Django.
+C'est fait via la commande: `admin.site.register(Band)`, *Band* désigne le nom du modèle.
+L'utilisation de ce site d'admin permet de bien comprendre ce que signifie `blank=True`.
+Pour consulter un modèle particulier enregistré sur le site d'admin par la commande précédente, on accède à l'url:
+`http://127.0.0.1:8000/admin/listings/band/ ` ou plus généralement `http://127.0.0.1:8000/admin/<nom-application>/<nom-du-modèle>/ `
+  
+Le site d'administration est une interface back-end prévue pour les devs mais surtout les admins, pour effectuer facilement des tests et 
+les interfaces CRUD. Pour les end-users il faudra souvent faire des personnalisés de formulaires.
 
   
                     
