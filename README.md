@@ -438,8 +438,8 @@ class Listing(models.Model):
 Cette référence permet d'obtenir par des requêtes le groupe de d'importe quelle annonce (ou article) en faisant `listing.band`.    
 On passe trois arguments à `ForeignKey`:
 - le modèle auquel on veut se rattacher: `Band`;
-- `null=True`: pour créer les annonces(articles) même si elles ne sont pas directement liées à un groupe;
--  L'argument `on_delete` permet de définir la stratégie à suivre lorsque les objets `Band` sont supprimés.
+- `null=True`: signifie que le groupe n'existe pas (autrement dit, il n'ya pas de  groupe associé) => cela permet de créer les annonces(articles) même si elles ne sont pas directement liées à un groupe;
+-  L'argument `on_delete` signifie que le groupe associé est supprimé => cela permet de définir la stratégie à suivre lorsque les objets `Band` sont supprimés.
  Il existe de multiples options pour cela, par exemple:           
 - définir le champ band comme ****null**** en utilisant `models.SET_NULL`,
 - définir le champ band à sa ****valeur par défaut**** en utilisant `models.SET_DEFAULT`,
@@ -447,7 +447,9 @@ On passe trois arguments à `ForeignKey`:
 - et d'autres paramètres plus complexes décrits dans la documentation de Django.
   Dans notre cas, on a choisi `models.SET_NULL` car on ne veut pas supprimer l'objet `Listing` si un `Band` est supprimé.
 
-  Nota: Une fois les modifs effectuées ne pas oublier d'appliquer les migrations.
+  Par la suite, il faut ajouter l'objet `Listing` au site d'administration en faisant `admin.site.register(Listing, ListingAdmin)`                
+
+  ****Nota:**** Une fois les modifs effectuées ne pas oublier d'appliquer les migrations et relancer le serveur (`python3 .\manage.py runserver`)
 
   Astuce: Pour voir les groupes associés (liés) aux articles, il suffit d'ajouter le champ `band` au `ListingAdmin`dans `admin.py`
   ```
