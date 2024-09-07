@@ -459,7 +459,7 @@ On passe trois arguments à `ForeignKey`:
 
 ### Quelques spécificités de la migration          
 
-#### Annulation de migration ####         
+**Annulation de migration**       
 On se place dans le cas où on a fait des migrations dont on veut annuler les changements, on a deux stratégies principales:
 
 - Si les modifications non souhaitées n'ont pas été partagées avec d'autres utilisateurs (sur un repo git et pullé par les autres devs par exemple),
@@ -483,9 +483,11 @@ Dans notre cas par exemple il faut supprimer la ligne problématique, et par la 
 Donc la migration problématique n'est pas supprimée (elle est justement visible dans l'historique), mais la nouvelle migration fait une modification qui met le code à l'état souhaité.
 Cette option est choisie car les autres dev ayant fait des pull, on ne peut pas leur demander d'aller chacun faire un rollback...
 
-**Fusion de migration**       
+**Fusion de migration conflictuelles**       
 
-Parfois, lorsque vous travaillez sur un projet avec d'autres développeurs, vous risquez d’être confronté à des migrations conflictuelles. Si ces migrations concernent des champs ou des modèles différents, vous pouvez les fusionner ; sinon, supprimez-les et créez de nouvelles migrations à la place.
+Parfois en travaillant sur un projet avec d'autres dev, on risque d’être confronté à des migrations conflictuelles. 
+Si ces migrations concernent des champs ou des modèles différents, on peut les fusionner par `python manage.py makemigrations --merge` 
+sinon, il faut les supprimer et créer de nouvelles migrations à la place.
 
 
 
