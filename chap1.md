@@ -1,5 +1,3 @@
-# Django training beginner (based on openclassrooms)
-
 ### Initialisation du projet         
                 
 `django-admin startproject stockexchange` => pour initialiser un projet django (nommé ici *stockexchange*)       
