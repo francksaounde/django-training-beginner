@@ -457,7 +457,21 @@ On passe trois arguments à `ForeignKey`:
   list_display = ('title', 'band')  
   ```
 
+### Quelques spécificités de la migration          
+~~The world is flat.~~   
+	I need to highlight these ==very important words==.   H~2~O        X^2^        
+ term
+: definition       
+> blockquote      
+--- 
+ 
+Lorsqu'il s'agit de rétablir les changements issus des migrations, il existe deux stratégies principales.
 
+Si les modifications non souhaitées n'ont pas été partagées avec d'autres utilisateurs, vous pouvez annuler la migration localement, puis la supprimer.
+
+Si les changements ont été partagés, il est préférable de créer une nouvelle migration qui annule les changements de la migration non désirée.
+
+Parfois, lorsque vous travaillez sur un projet avec d'autres développeurs, vous risquez d’être confronté à des migrations conflictuelles. Si ces migrations concernent des champs ou des modèles différents, vous pouvez les fusionner ; sinon, supprimez-les et créez de nouvelles migrations à la place.
 
 
 
