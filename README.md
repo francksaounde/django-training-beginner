@@ -458,22 +458,32 @@ On passe trois arguments à `ForeignKey`:
   ```
 
 ### Quelques spécificités de la migration          
-~~The world is flat.~~   
-	I need to highlight these ==very important words==.     
- H~2~O        
- X^2^        
-            
- term
-: definition           
 
-> blockquote      
---- 
- 
-Lorsqu'il s'agit de rétablir les changements issus des migrations, il existe deux stratégies principales.
+#### Annulation de migration ####         
+On se place dans le cas où on a fait des migrations dont on veut annuler les changements, on a deux stratégies principales:
 
-Si les modifications non souhaitées n'ont pas été partagées avec d'autres utilisateurs, vous pouvez annuler la migration localement, puis la supprimer.
+- Si les modifications non souhaitées n'ont pas été partagées avec d'autres utilisateurs (sur un repo git et pullé par les autres devs par exemple),
+  on peut annuler la migration localement (simple *rollback*), puis la supprimer pour revenir à la migration précédente.
+  Pour cela on commence par repérer la migration "fâcheuse" (celle qu'on veut supprimer) en affichant la liste des migrations
+  grâce à la commande: `python manage.py showmigrations`.
+  Une fois la migration repérée (dans notre cas pratique il s'agit de: `0006_band_like_new`), on repère aussi la migration précédente (`0005_listing_band`).
+  Ensuite on annule la migration fâcheuse en faisant le rollback à proprement parler (ce rollback me fait penser au `git reset --hard` avec git):
+  ```
+  python manage.py migrate <nom-application>.<nom-migration-précédente>	
+  ```
+  On peut vérifier que la migration fâcheuse n'a pas été appliquée en affichant de nouveau les migrations par `python manage.py showmigrations`.
+  On peut constater que la migration `listings.0006_band_like_new` apparaît sans **[X]** à côté ce qui signifie qu'elle n'a pas été exécutée.
+  Enfin on supprime (le fichier de) la migration fâcheuse en faisant: `rm listings/migrations/0006_band_like_new.py `
+  
 
-Si les changements ont été partagés, il est préférable de créer une nouvelle migration qui annule les changements de la migration non désirée.
+- Si les changements ont été partagés, il est préférable de créer une nouvelle migration qui annule les changements de la migration non désirée.
+La nuance ici est qu'il ne s'agit pas d'un rollback (comme précédemment). Il est plutôt question de modifier le code manuellement pour revenir à l'état
+antérieur à la modification.
+Dans notre cas par exemple il faut supprimer la ligne problématique, et par la suite créer et exécuter une nouvelle migration.
+Donc la migration problématique n'est pas supprimée (elle est justement visible dans l'historique), mais la nouvelle migration fait une modification qui met le code à l'état souhaité.
+Cette option est choisie car les autres dev ayant fait des pull, on ne peut pas leur demander d'aller chacun faire un rollback...
+
+*Fusion de migration pour 
 
 Parfois, lorsque vous travaillez sur un projet avec d'autres développeurs, vous risquez d’être confronté à des migrations conflictuelles. Si ces migrations concernent des champs ou des modèles différents, vous pouvez les fusionner ; sinon, supprimez-les et créez de nouvelles migrations à la place.
 
