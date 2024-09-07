@@ -119,7 +119,7 @@ On met ce code dans une vue.
 - Nous pouvons utiliser le shell de Django pour insérer de nouveaux objets dans notre base de données.
 - Dans une vue, nous pouvons récupérer des objets dans la base de données et afficher leurs données dans nos pages.
 
--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+----
 
 ### Gabarit (ou template) Django      
 Fichier HTML capable d'interpréter du code Python. Il peut donc recevoir des données depuis le modèle et intégrer des mécanismes comme des boucles.           
@@ -244,7 +244,7 @@ Qui affiche  `"J'ai quelques groupes préférés."` si la longueur de la liste v
 
 - Nous utilisons les balises de gabarits pour les boucles, les embranchements et le formatage dans les gabarits.
 
-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+---
 
 ### Création/Extraction d'un gabarit de base - Ajout de feuilles de style (CSS) et de fichiers statiques     
 
@@ -278,8 +278,8 @@ Le principe est celui de l'héritage (d'où le mot clé _extends_). Les gabarits
 {% block content %}
 
 <h1>Hello Django !</h1>
-...
-</ul>
+      ...
+      ...
 
 {% endblock %}
 ```
