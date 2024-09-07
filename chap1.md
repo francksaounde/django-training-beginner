@@ -95,7 +95,7 @@ La commande `python manage.py makemigrations` va générer les scripts SQL et la
 La commande `makemigrations` scanne le fichier models.py et fait le différentiel entre les deux états: ancien et nouveau,    
 puis génère les migrations pour que la bdd soit à jour avec le nouveau modèle.              
 
-****Utilisation du shell django****: Le shell de Django est simplement un shell Python ordinaire qui exécute votre application Django. Il permet d'essayer du code en temps réel.       
+****Utilisation du shell django****: Le shell de Django est simplement un shell Python ordinaire qui exécute notre application Django. Il permet d'essayer du code en temps réel.       
 Pour ouvrir le shell faire la commande `python manage.py shell`.          
 _Nota:_ Le code d'un module/fichier Python peut être exécuté de nombreuses fois tandis que le code tapé dans le shell Django n'est exécuté qu'une seule fois, puis oublié (puisqu'il n'est pas stocké quelque part). Mais ses effets sont bien entendu permanents quand ils sont stockés via la méthode save.           
 La méthode `save` permet de stocker l'objet en bdd et par la même occasion de lui attribuer un id; elle est héritée de la classe de base `models.Model` (de Django) dont hérite nos modèles.              
@@ -277,9 +277,10 @@ Le principe est celui de l'héritage (d'où le mot clé _extends_). Les gabarits
 
 {% block content %}
 
-<h1>Hello Django !</h1>
+      <h1>Hello Django !</h1>
       ...
-      ...
+      <ul>...</ul>
+      ...      
 
 {% endblock %}
 ```
@@ -313,12 +314,12 @@ Le rendu côté serveur est la manière « ancienne » de générer le contenu H
 Aujourd'hui, il existe de nombreux frameworks permettant de créer des applications front-end riches dans le navigateur, 
 où le HTML est généré côté client et où seule une quantité minimale de données est envoyée entre le navigateur et le serveur, ce qui donne des applications rapides comme l'éclair.
                             
-Mais cela ne signifie pas que vous devez ignorer le rendu côté serveur ! C'est un bon point de départ. Et pour de nombreuses applications, 
+Mais cela ne signifie pas qu'il faut ignorer le rendu côté serveur ! C'est un bon point de départ. Et pour de nombreuses applications, 
 le rendu côté serveur est une solution adéquate. Elle est simple à comprendre. Elle réduit la complexité de l'application car elle ne nécessite pas de construire une API REST. 
-Et votre application peut tenir dans un seul repository, car il n'est pas nécessaire d'avoir une application frontale JavaScript distincte. 
+Et notre application peut tenir dans un seul repository, car il n'est pas nécessaire d'avoir une application frontale JavaScript distincte. 
 C'est pourquoi le rendu côté serveur avec Django est idéal pour les applications de démonstration et les applications à l’interface simple.
 
-Si les besoins de votre application évoluent par la suite, vous pouvez convertir votre projet Django et son rendu côté serveur en une API REST à l'aide du cadre Django REST.
+Si les besoins de l'application évoluent par la suite, on peut convertir le projet Django et son rendu côté serveur en une API REST à l'aide du cadre Django REST.
 
 Quelques éléments qui ressortent du quizz:     
 - La balise `{% now "Y" %}` permet d'extraire l'année en cours
