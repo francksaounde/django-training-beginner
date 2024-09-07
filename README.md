@@ -459,9 +459,13 @@ On passe trois arguments à `ForeignKey`:
 
 ### Quelques spécificités de la migration          
 ~~The world is flat.~~   
-	I need to highlight these ==very important words==.   H~2~O        X^2^        
+	I need to highlight these ==very important words==.     
+ H~2~O        
+ X^2^        
+            
  term
-: definition       
+: definition           
+
 > blockquote      
 --- 
  
