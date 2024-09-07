@@ -147,7 +147,17 @@ Ainsi avec deux applications app1 et app2, et des fichiers temp1_app1, temp2_app
 
 *****Mise à jour de la vue pour la génération du gabarit*****      
 Jusqu'ici la vue faisait une génération brute d'objet HttpResponse. Maintenant nous introduisons la méthode `render` qui prend un objet `HttpRequest` (nommé par convention `request`) 
-et d'autres arguments et retourne un `HttpResponse`.    
+et d'autres arguments et retourne un `HttpResponse`. Tout ceci est illustré ci-après:          
+```
+...
+from django.shortcuts import render
+...
+
+def hello(request):
+    bands = Band.objects.all()
+    return render(request, 'listings/hello.html',
+        {'first_band': bands[0]})
+``` 
 ***Rappel définition (technique) d'une vue:***
 Une vue est un élément qui prend en entrée un objet de type HttpRequest et retourne un HttpResponse.                   
 
