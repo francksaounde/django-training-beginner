@@ -169,10 +169,10 @@ Chaque clé du dictionnaire devient une variable que nous pouvons utiliser pour 
 En effet, `la clé est identifiée à sa valeur`.
 Par exemple la définition `{'first_band': bands[0]})` au niveau de la vue, permet d'écrire: `{{ first_band.name }}` au niveau du template.                           
 Cette écriture est équivalente à l'écriture Python: `band[0].name` pour indexer le champ name du 1er groupe (indice 0) du QuerySet.              
-Les _accolades doubles_ sont utilisées au niveau du gabarit pour injecter des appels au modèle via les variables passées par le dictionnaire contextuel de la vue.
+Les ****accolades-doubles**** sont utilisées au niveau du gabarit pour injecter des appels au modèle via les variables passées par le dictionnaire contextuel de la vue.
 
-Nota: Dans un code HTML valide, les gabarits de Django peuvent inclure une syntaxe avec des accolades, on l'appelle aussi *****langage de gabarits Django*****. Et 
-les variables appelées entre accolades sont appelées aussi *****variables de gabarits*****         
+Nota: Dans un code HTML valide, les gabarits de Django peuvent inclure une syntaxe avec des accolades (et plus précisément ****double-accolades****), on l'appelle aussi *****langage de gabarits Django*****. Et 
+les variables appelées entre ****double-accolades**** sont appelées aussi *****variables de gabarits*****         
 Prenons un deuxième exemple: le dictionnaire `{'cle': bands}` donne lieu dans le gabarit aux appels `{{ cle.i.name }}` avec _i_ l'indice du groupe dans le Queryset.      
 ```
 - {{ cle.0.name }}
