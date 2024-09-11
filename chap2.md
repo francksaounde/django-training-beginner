@@ -18,6 +18,23 @@ L'argument (ou option de champ) `max_length` est obligatoire sinon une erreur se
 - `null = True` permet d'indiquer que le champ peut ne pas être renseigné en bdd; pour de tels champs on n'a pas en s'en faire s'il existe déjà des
 enregistrements en bdd: la migration ne posera aucun souci. En effet, le champ en bdd peut avoir la valeur NULL.
 
+On a par exemple la définition suivante:      
+```
+# listings/models.py  (d'après le cours d'origine cette ligne indique le chemin vers le fichier courant)
+
+from django.core.validators import MaxValueValidator, MinValueValidator
+...
+    class Band(models.Model):
+    name = models.fields.CharField(max_length=100)
+    genre = models.fields.CharField(max_length=50)
+    biography = models.fields.CharField(max_length=1000)
+    year_formed = models.fields.IntegerField(
+      validators=[MinValueValidator(1900), MaxValueValidator(2021)]
+      )
+    active = models.fields.BooleanField(default=True)
+    official_homepage = models.fields.URLField(null=True, blank=True)
+```
+
 *****Nota:*****     
 a) Quand on ajoute un nouveau champ dans une bdd qui possède déjà des enregistrements il faut faire attention aux valeurs par défaut.
 Si la valeur par défaut n'est pas valide, la migration génèrera une erreur.
