@@ -1,0 +1,15 @@
+{% extends 'listings/base.html' %}
+
+{% block content %}
+
+    <h1> Bienvenue sur la page du groupe {{band.name}}</h1>
+    <ul>
+        <li> L'identifiant est {{band.id}}</li>
+        <li> Le genre est  {{band.get_genre_display}}</li>
+        <li> Le groupe est-il actif ==>  {{band.active|yesno}}</li>
+        <li> Il a été créé en {{band.year_formed}}</li>
+        {% if band.official_homepage %}
+            <li>Son site internet est <a href="https://foofighters.com/"> {{band.official_homepage}}</a> </li>
+        {% endif %}
+    </ul>
+{% endblock %}
