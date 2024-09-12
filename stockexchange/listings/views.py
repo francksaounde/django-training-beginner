@@ -21,11 +21,19 @@ def about(request):
     return render(request, 'listings/about.html')
 
 
-def listings(request):
+def listing_list(request):
     listings = Listing.objects.all()
-    return render(request, 'listings/listings.html',
+    return render(request, 'listings/listing_list.html',
                   {'listings': listings})
+
+
+def listing_detail(request, listing_id):
+    # band = Band.objects.get(id=band_id)
+    listing = get_object_or_404(Listing, id=listing_id)
+    return render(request, "listings/listing_detail.html",
+                  {'listing': listing})
 
 
 def contact(request):
     return render(request, 'listings/contact.html')
+
