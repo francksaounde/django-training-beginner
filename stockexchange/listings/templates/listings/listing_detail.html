@@ -2,16 +2,22 @@
 
 {% block content %}
 
-    <h1> Bienvenue sur la page du groupe {{ listing.title}}</h1>
+    <h1>
+        Bienvenue sur la page du groupe
+    </h1>
+     <h3>
+            {{ listing.title}}
+     </h3>
     <ul>
-        <li> L'identifiant est {{listing.id}}</li>
-        <li> Le type est  {{title.type}}</li>
-        <li> Il a été créé en {{band.year_formed}}</li>
-        {% if band.official_homepage %}
-            <li>Son site internet est <a href="https://foofighters.com/"> {{band.official_homepage}}</a> </li>
-        {% endif %}
-    </ul>
-    <p> {{ band.biography }} </p>
+        <li> L'identifiant est {{listing.id}} </li>
+        <li> Le type est  {{listing.type}} </li>
 
-    <h3>Retour aux <a href="{% url 'band-list' %}">groupes</a> </h3>
+        {% if listing.year %}
+        <li> Il a été créé en {{listing.year}} </li>
+        {% endif %}
+
+        <li> Cette annonce est relative au groupe {{listing.band}} </li>
+    </ul>
+
+    <h3>Retour aux <a href="{% url 'listing-list' %}">annonces</a> </h3>
 {% endblock %}

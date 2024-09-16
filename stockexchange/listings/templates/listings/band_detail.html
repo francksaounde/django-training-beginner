@@ -11,7 +11,22 @@
         {% if band.official_homepage %}
             <li>Son site internet est <a href="https://foofighters.com/"> {{band.official_homepage}}</a> </li>
         {% endif %}
+
     </ul>
+
+
+    {% if band.listing_set.all %}
+    <p>
+    Il a été annoncé par:
+            {% for listing in band.listing_set.all %}
+            <li>
+                {{ listing.title }}
+            </li>
+            {% endfor %}
+     </p>
+    {% endif %}
+
+
     <p> {{ band.biography }} </p>
 
     <h3>Retour aux <a href="{% url 'band-list' %}">groupes</a> </h3>
