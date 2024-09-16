@@ -139,7 +139,8 @@ Et le gabarit:
   <li><a href="{% url 'band-detail' band.id %}">{{ band.name }}</a></li>
 …
 ```
-De même la vue détaillée du groupe doit comporter un lien vers la liste des groupes :            
+De même la vue détaillée du groupe doit comporter un lien vers la liste des groupes :      
+On obtient.            
 => modèle d'URL            
 ```
 # merchex/urls.py
@@ -157,7 +158,14 @@ De même la vue détaillée du groupe doit comporter un lien vers la liste des g
 {% endblock %}
 ```
 
+**Astuce ManyToOne OneToMany:**      
+A titre de rappel, un groupe peut être lié à plusieurs annonces mais une annonce concerne un seul groupe.     
 
+Pour faire référence au groupe d'une annonce on fait simplement: `listing.band` (le champ band étant dans la définition du modèle listing).      
+
+Inversément, on peut faire référence à la liste des annonces d'un groupe grâce à **listing_set** qui renvoie un set de listings (littéralement),      
+et en pointant sur all, on les prend tous. Ca donne donc: `band.listing_set.all` et dans le cas d'une boucle avec balise de gabarit on fera:   
+`{% for listing in band.listing_set.all %}`.    
 
 
 
