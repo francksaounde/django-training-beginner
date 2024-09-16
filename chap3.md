@@ -16,7 +16,7 @@ Django permet de donner un accès spécifique à un user précis (authentifié) 
 **Une vue en liste** affiche une liste de tous les objets d'un modèle avec un minimum de détails, par exemple juste le titre d’une annonce ou juste le nom du groupe ;        
 **Une vue détaillée** affiche un objet avec tous ses détails et tous les champs affichés.        
 
-=> Vue en liste:     
+**=> Vue en liste:**     
 Dans le tuto on prend une convention d'appellation. On utilise le format **« <nom du modèle type de vue>.html »**.  
 On aura donc _band_list.html_ pour la vue en liste des objets Band.          
 Le code du template ressemble à:
@@ -64,7 +64,7 @@ urlpatterns = [
 Convention:  
 Chaque chemin se termine par un slash (« / »), c'est une convention Django.      
 
-=> Vue détaillée :        
+**=> Vue détaillée:**                  
 Modèle d'URL:
 ```
 # merchex/urls.py
